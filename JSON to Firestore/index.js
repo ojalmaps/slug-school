@@ -1,14 +1,18 @@
 const admin = require('./node_modules/firebase-admin');
 
+// service-key.json is the encryption key you get from firestore through a separate process
 const serviceAccount = require("./service-key.json");
 
+// FILENAME is the name of the converted json file
 const data = require("./FILENAME.json");
 
+// COLLECTION_NAME is the name you give the collection in Firestore. Examples are Winter2010, Spring2010, and Fall2011
 const collectionKey = "COLECTION_NAME"; //name of the collection
 
 admin.initializeApp({
    credential: admin.credential.cert(serviceAccount),
-   databaseURL: "https://slug-meet.firebaseio.com"
+   // DATABASE_NAME is the name of the firebase project. Ours is currently called slug-meet
+   databaseURL: "https://DATABASE_NAME.firebaseio.com"
 });
 const firestore = admin.firestore();
 
