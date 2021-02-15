@@ -2,8 +2,23 @@ import 'package:flutter/material.dart';
 import 'screens/login.dart';
 import 'theme/themes.dart';
 import 'screens/profpages.dart';
+// import 'dart:io';
+import 'package:path/path.dart';
+import 'package:excel/excel.dart';
+import 'package:csv/csv.dart' as csv;
+// Import the firebase_core plugin
+import 'package:firebase_core/firebase_core.dart';
 
+List<String>prof_inf = ["Abdollahian,Yashar","CHEM- 1N","Gen Chem Lab"];
+List<int> p_grades = [0,113,37,28,74,12,5,11,3,1,0,0,1];
+// Convert the csv file to a list
+// List <List> csvToList(File myCsvFile){
+//   csv.CsvToListConverter c = new csv.CsvToListConverter();
+//   List<List> listCreated = c.convert(myCsvFile.readAsStringSync());
+//   return listCreated;
+// }
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -18,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Slug Meet',
+      title: 'Slug School',
       theme: getSlugTheme(),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -67,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 //Texts and Styling of them
                 Text(
-                  'Welcome to Slug Meet!',
+                  'Welcome to Slug School!',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 28),
                 ),
@@ -108,9 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => ProfPage(
-                            'Mystery Slug', 
-                            Image.asset('images/anonymous-user.png', height: 250, ),
-                            ['CSE101', 'CSE12', 'CSE13S']
+                            Professor(prof_inf, p_grades),
                           )
                         ));
                   }
@@ -121,3 +134,29 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class App extends StatelessWidget {
+  // Create the initialization Future outside of `build`:
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return MyApp();
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MyApp();
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return MyApp();
+      },
+    );
+  }
+}

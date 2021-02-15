@@ -1,49 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../theme/themes.dart';
+import 'coursepages.dart';
+import 'package:path/path.dart';
+import 'package:excel/excel.dart';
+
 
 class ProfPage extends StatefulWidget{
-    // Professor Name
-    final String profname;
-    // Professor Picture
-    final Image profpic;
-    // A list of courses taught by the professor
-    final List<String> courses;
+    // Professor
+    final Professor prof;
 
-    ProfPage(this.profname, this.profpic, this.courses);
+    ProfPage(this.prof);
 
     // 
     @override
-    _ProfPageState createState() => _ProfPageState(profname, profpic, courses);
+    _ProfPageState createState() => _ProfPageState(this.prof);
 
 }
 
 class _ProfPageState extends State<ProfPage> {
-  String profname;
-  Image profpic;
-  List<String> courses;
+  Professor prof;
 
   
   // Constructor
-  _ProfPageState(this.profname, this.profpic, this.courses);
+  _ProfPageState(this.prof);
 
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text(this.profname),),
+      appBar: AppBar(title: Text(prof.name),),
       body: Center(
           child: (Container(
             child: Column(
-              children: [this.profpic, 
+              children: [
+                ClipOval(child: Image.asset('images/anonymous-user.png', height: 250, )), 
                 Text('This is a professor page!', 
                 textAlign: TextAlign.center), 
-                Text(' COURSES', textAlign: TextAlign.left,),
-                Row(
-                  children: this.courses.map(
-                      (element) => Card(
-                        child: Text(element),
-                      )
-                    ).toList()
+                Text(' COURSE', textAlign: TextAlign.left,),
+                Column(
+                  children: prof.info.map((element) => new Text(element)).toList()
                 ),
               ],
               mainAxisAlignment: MainAxisAlignment.center,
@@ -62,15 +57,14 @@ class _ProfPageState extends State<ProfPage> {
 class Professor{
   String name;
   Image pic;
-  List<String> courses;
-  List<String> reviews;
-    
+  List<String> info;
+  List<int> grades;
 
-  Professor(String profName, Image profPic, List<String> profCourses, List<String> profReviews){
-    this.name = profName;
-    this.pic = profPic;
-    this.courses = profCourses;
-    this.reviews = profReviews;
+
+  Professor(List<String> infrm, List<int> grds){
+    this.name = infrm[0];
+    this.info = infrm;
+    this.grades = grds;
   }
 
   // (Placeholder) Return an average of the prof's ratings
