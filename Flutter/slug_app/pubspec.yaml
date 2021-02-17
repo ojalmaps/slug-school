@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_core: "0.7.0"
+  cloud_firestore: "^0.16.0"
   excel: ^1.1.5
   csv: ^4.1.0
   universal_platform: ^0.1.3

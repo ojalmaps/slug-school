@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'screens/login.dart';
 import 'theme/themes.dart';
 import 'screens/profpages.dart';
-// import 'dart:io';
 import 'package:path/path.dart';
 import 'package:excel/excel.dart';
 import 'package:csv/csv.dart' as csv;
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 List<String>prof_inf = ["Abdollahian,Yashar","CHEM- 1N","Gen Chem Lab"];
 List<int> p_grades = [0,113,37,28,74,12,5,11,3,1,0,0,1];
@@ -19,6 +19,7 @@ List<int> p_grades = [0,113,37,28,74,12,5,11,3,1,0,0,1];
 // }
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   runApp(MyApp());
 }
 
@@ -134,6 +135,37 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class FailPage extends StatefulWidget {
+  FailPage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _FailPageState createState() => _FailPageState();
+}
+
+class _FailPageState extends State<FailPage> {
+  
+  @override
+  Widget build(BuildContext context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return Scaffold(
+       body: Column(children: [
+         Text("The Connection with firestore failed!", 
+         style: new TextStyle(fontSize: 36),
+         ),
+       ],),
+    );
+  }
+}
+
+
+
+
 class App extends StatelessWidget {
   // Create the initialization Future outside of `build`:
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
@@ -146,7 +178,7 @@ class App extends StatelessWidget {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return MyApp();
+          return FailPage();
         }
 
         // Once complete, show your application
@@ -155,7 +187,7 @@ class App extends StatelessWidget {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return MyApp();
+        return FailPage();
       },
     );
   }

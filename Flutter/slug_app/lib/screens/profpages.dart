@@ -1,3 +1,6 @@
+import 'dart:js';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../theme/themes.dart';
@@ -29,27 +32,44 @@ class _ProfPageState extends State<ProfPage> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(title: Text(prof.name),),
-      body: Center(
-          child: (Container(
-            child: Column(
-              children: [
-                ClipOval(child: Image.asset('images/anonymous-user.png', height: 250, )), 
-                Text('This is a professor page!', 
-                textAlign: TextAlign.center), 
-                Text(' COURSE', textAlign: TextAlign.left,),
-                Column(
-                  children: prof.info.map((element) => new Text(element)).toList()
-                ),
-              ],
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-            ),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.yellow)
-            ),
-          )
-          )
-      ),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection("Fall2011").snapshots(),
+        builder: (context, snapshot) {
+          if(snapshot.hasError){
+            return Text(snapshot.error.toString());
+            return Text("Error with the snapshot");
+          }
+          if(!snapshot.hasData){
+            return Text("Loading data... Please Wait");
+          }
+          return Column(
+            children: <Widget>[
+              Text(snapshot.data.documents[0]["Course Title"]),
+            ],
+          );
+        },
+        ),
+      // body: Center(
+      //     child: (Container(
+      //       child: Column(
+      //         children: [
+      //           ClipOval(child: Image.asset('images/anonymous-user.png', height: 250, )), 
+      //           Text('This is a professor page!', 
+      //           textAlign: TextAlign.center), 
+      //           Text(' COURSE', textAlign: TextAlign.left,),
+      //           Column(
+      //             children: prof.info.map((element) => new Text(element)).toList()
+      //           ),
+      //         ],
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         crossAxisAlignment: CrossAxisAlignment.center,
+      //       ),
+      //       decoration: BoxDecoration(
+      //         border: Border.all(color: Colors.yellow)
+      //       ),
+      //     )
+      //     )
+      // ),
     );
   }
 }
