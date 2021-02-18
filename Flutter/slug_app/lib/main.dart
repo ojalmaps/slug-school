@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'screens/login.dart';
 import 'theme/themes.dart';
 import 'screens/profpages.dart';
+
+import 'screens/searchpage.dart';
+// import 'dart:io';
 import 'package:path/path.dart';
 import 'package:excel/excel.dart';
 import 'package:csv/csv.dart' as csv;
@@ -9,8 +12,8 @@ import 'package:csv/csv.dart' as csv;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-List<String>prof_inf = ["Abdollahian,Yashar","CHEM- 1N","Gen Chem Lab"];
-List<int> p_grades = [0,113,37,28,74,12,5,11,3,1,0,0,1];
+List<String> prof_inf = ["Abdollahian,Yashar", "CHEM- 1N", "Gen Chem Lab"];
+List<int> p_grades = [0, 113, 37, 28, 74, 12, 5, 11, 3, 1, 0, 0, 1];
 // Convert the csv file to a list
 // List <List> csvToList(File myCsvFile){
 //   csv.CsvToListConverter c = new csv.CsvToListConverter();
@@ -35,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Slug School',
-      theme: getSlugTheme(),
+      theme: SlugThemes().getSlugTheme(),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -60,7 +63,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -70,67 +72,106 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-       body: Column(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          //We take the image from the assets
+          Image.asset(
+            'images/slug.png',
+            height: 250,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          //Texts and Styling of them
+          Text(
+            'Welcome to Slug School!',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white, fontSize: 28),
+          ),
+          SizedBox(height: 20),
+          Text(
+            'An app to help you make important enrollment decisions.',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          //Our MaterialButton which when pressed will take us to a new screen named as
+          //LoginScreen
+          MaterialButton(
+            elevation: 0,
+            height: 50,
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => LoginScreen()));
+            },
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                //We take the image from the assets
-                Image.asset(
-                  'images/slug.png',
-                  height: 250,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                //Texts and Styling of them
                 Text(
-                  'Welcome to Slug School!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 28),
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'An app to help you make important enrollment decisions.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                //Our MaterialButton which when pressed will take us to a new screen named as 
-                //LoginScreen
-                MaterialButton(
-                  elevation: 0,
-                  height: 50,
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => LoginScreen()));
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text('Get Started',
-                          style: TextStyle(color: Colors.black, fontSize: 20,),
-                          ),
-                      Icon(Icons.arrow_forward_ios, color: Colors.black,)
-                    ],
+                  'Get Started',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
                   ),
-                  textColor: Colors.white,
                 ),
-                MaterialButton(
-                  child: Row(children: <Widget>[Text("Click for Dummy Prof Page", textAlign: TextAlign.center,), 
-                                      Icon(Icons.account_circle_sharp),],
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                            ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => ProfPage(
-                            Professor(prof_inf, p_grades),
-                          )
-                        ));
-                  }
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
                 )
               ],
             ),
+            textColor: Colors.white,
+          ),
+          MaterialButton(
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    "Click for Dummy Prof Page",
+                    textAlign: TextAlign.center,
+                  ),
+                  Icon(Icons.account_circle_sharp),
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => ProfPage(
+                              Professor(prof_inf, p_grades),
+                            )));
+              }),
+          MaterialButton(
+            // button to redirect to search page
+            elevation: 0,
+            height: 50,
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => SearchPage()));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Search for Course or Professor',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )
+              ],
+            ),
+            textColor: Colors.white,
+          ),
+        ],
+      ),
     );
   }
 }
