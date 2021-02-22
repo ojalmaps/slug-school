@@ -3,6 +3,8 @@
 //   video: https://www.youtube.com/watch?v=H3CCtCmBUoQ
 
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -11,37 +13,23 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   TextEditingController searchController = TextEditingController();
-
-  Future resultsLoaded;
-  List allResults = [
-    'Abadi, Martin',
-    'Abrams, Elizabeth',
-    'Abrams, Zsuzsanna',
-    'Aissen, Judith',
-    'Akeson, Mark',
-    'Anand, Pranav',
-    'Anderson, Mark',
-    'Ares, Manuel',
-    'Aronson, Elliot',
-    'CSE 13S',
-    'CSE 16',
-    'CSE 142',
-    'CSE 144',
-    'CSE 180',
-    'CSE 182',
-    'CHEM 1A',
-    'CHEM 1B',
-    'CHEM 1M',
-    'CHEM 1C',
-    'CHEM 1N',
-    'CHEM 8A',
-    'CHEM 8B'
-  ];
+  CollectionReference profs = FirebaseFirestore.instance.collection('Fall2011');
+  List allResults = [];
   List resultsList = [];
 
   @override
   void initState() {
     super.initState();
+
+    // generate list (QuerySnapshot) of the collection and add all of the
+    // professors names to allResults list
+    profs.get().then((QuerySnapshot querySnapshot) => {
+          querySnapshot.docs.forEach((doc) {
+            // allResults.add(doc["Course Title"]);  // add course names to list
+            allResults.add(doc.id);  // add professor names to list
+          })
+        });
+
     searchController.addListener(onSearchChanged);
   }
 
