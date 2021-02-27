@@ -68,6 +68,7 @@ class SlugThemes {
     return new TextStyle(
       fontSize: 24,
       backgroundColor: this.accentTwo,
+      color: Colors.black
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sandbox/screens/coursepages.dart';
 import 'screens/login.dart';
 import 'theme/themes.dart';
 import 'screens/profpages.dart';
@@ -141,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     context,
                     MaterialPageRoute(
                         builder: (_) => ProfPage(
-                              Professor(prof_inf, p_grades),
+                              Professor("Abbink,Emily K.", "Fall2011"),
                             )));
               }),
           MaterialButton(
@@ -170,6 +171,25 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             textColor: Colors.white,
           ),
+          MaterialButton(
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    "Click for Dummy Course Page",
+                    textAlign: TextAlign.center,
+                  ),
+                  Icon(Icons.account_circle_sharp),
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => CoursePage(
+                              Course("Fall2011_CourseNumber", "CMPS- 5J"),
+                            )));
+              }),
         ],
       ),
     );

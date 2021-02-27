@@ -20,6 +20,7 @@ String test4 = 'Zavaleta,Erika S';
 
 // Given the professors name as a string as it appears in the spreadsheets
 // get the data from firestore and return a Column of the info
+// If unsuccessful, display some kind of error message
 class GetProfInfo extends StatelessWidget {
   final String documentId;
 
@@ -96,34 +97,28 @@ class ProfPage extends StatefulWidget{
 class _ProfPageState extends State<ProfPage> {
   Professor prof;
 
-  
   // Constructor
   _ProfPageState(this.prof);
 
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body: Center(child: GetProfInfo(test2)),
+      body: Center(child: GetProfInfo(test4)),
     );
   }
 }
 
+// Class to represent a professor
 class Professor{
-  String name;
-  Image pic;
-  List<String> info;
-  List<int> grades;
+  String name;  // Name (Document ID from firestore)
+  String colID; // Collection ID (Year and quarter of the data ex. "Fall2011")
+  Image pic;    // Image of professor to be displayed
 
+  // A list with the course data, may not be used
+  List<dynamic> courseInfo; 
 
-  Professor(List<String> infrm, List<int> grds){
-    this.name = infrm[0];
-    this.info = infrm;
-    this.grades = grds;
-  }
-
-  // (Placeholder) Return an average of the prof's ratings
-  int getAverageRating(){
-    return 1;
+  Professor(String docID, String collectionID){
+    this.name = docID;
+    this.colID = collectionID;
   }
 }
-
