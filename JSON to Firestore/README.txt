@@ -24,7 +24,7 @@ IMPORTANT:
 Instead of running the code:
   1. Open a terminal in VSC/whatever IDE you use
   2. Change directory to one level before the folder that contains everything
-    a. Ex: If the path to the project is "/User/Programming/FOLDER_NAME" (My folder name was JSON-Firestore)
+    a. Ex: If the path to the project is "/User/Programming/FOLDER_NAME"
     b. Navigate to "/User/Programming"
   3. Type in the command "node FOLDER_NAME"
     a. Because there is no html file, simply running the code will just produce a "localhost refused to connect" error
