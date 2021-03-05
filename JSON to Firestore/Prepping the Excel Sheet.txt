@@ -1,0 +1,54 @@
+Tutorial on how to format the excel files we received from the school
+
+Note: I used Google Sheets so commands might vary if you use Microsoft Excel, Numbers, etc.
+
+Steps:
+  1. Import the file to a blank Google Sheet
+  
+  2. Delete rows 1-5, so Instructor, Subject-Catalog Number, etc. become row 1
+  
+  3. Insert a Column to the left of the Instructor Names, and name it Unique ID
+    a. Enter 1, 2, 3 respective to rows 2, 3, 4
+    b. Drag this all the way down until the last class is reached
+    c. This will serve as the Unique Document ID when we export the JSON to Firestore
+    
+  4. Select the column containing the Instructor names (Should be Column B)
+    a. Go to "Data" in the menu bar
+    b. Select "Split text to columns"
+    Note: You should see the names split into columns by lastname firstname
+    
+  5. Create a new Column to the left of column B and select the first row in that column (i.e. the new Column B row 1)
+    a. Select that entire column and outline each cell with all lines (top, bottom, left, and right)
+    
+  6. Go to the fx text entry above the Column headers
+    a. Type in this: =C1&", "&D1
+    b. Drag the box through all elements that contain Instructor names of column B, so the formula can be applied to every cell
+    c. This will merge columns C and D, and separate them by a comma
+    Note: This has the side effect of making even empty cells contain a comma. This will be fixed in later steps
+    
+  7. Select Column B (which contains the formula combining Columns C and D) and click Ctrl+C
+    a. Click on a completely blank column (ex: column S) and click Ctrl+Shift+V
+    b. This is needed because whatever is in column B doesn't contain actual values. it's Just a formula that requires Columns C and D to exist
+  
+  8. Now select Columns B, C, and D and delete them
+    a. OPTIONAL: Move column S to column B
+    b. This doesn't affect the end product when uploading to Firestore, but it does make the spreadsheet look more organized
+    
+  9. Now we have to remove the unneccessary commas
+    a. Go to "Edit" in the menu bar
+    b. Click "Find and Replace"
+    c. Inside of Find put: ", " (Not including the quoation marks)
+        Note: it is essential to put a space after the comma
+    d. Inside Replace with: do not put anything (should be blank)
+    e. Check the "Match entire cell contents" option
+    f. Click "Replace all"
+    e. Click Done
+    
+  10. Now we have to replace the empty cells in the "Intructor" column with actual names
+    a. Use this tutorial: https://infoinspired.com/google-docs/spreadsheet/fill-blank-cells-with-the-values-above/
+    
+  11. Now download the file as a csv
+  
+  12. Refer to Readme.text for further instruction
+    
+    
