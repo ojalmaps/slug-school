@@ -23,7 +23,10 @@ firestore.settings(settings);
 if (data && (typeof data === "object")) {
 
    Object.keys(data).forEach(docKey => {
-      admin.firestore().collection(collectionKey).doc(docKey).set(data[docKey]).then((res) => {
+      admin.firestore().collection(collectionKey)
+         .doc() // Do .doc(docKey) if you want to use the Unique ID as the Document ID in Firestore
+         .set(data[docKey])
+         .then((res) => {
          console.log("Document " + docKey + " successfully written!");
 
       }).catch((error) => {
