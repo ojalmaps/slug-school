@@ -27,8 +27,9 @@ Steps:
     Note: This has the side effect of making even empty cells contain a comma. This will be fixed in later steps
     
   7. Select Column B (which contains the formula combining Columns C and D) and click Ctrl+C
-    a. Click on a completely blank column (ex: column S) and click Ctrl+Shift+V
-    b. This is needed because whatever is in column B doesn't contain actual values. it's Just a formula that requires Columns C and D to exist
+    a. Click on a completely blank column (ex: column S) and border the outline of the cells (top, bottom, left, right)
+    b. Click Ctrl+Shift+V
+    c. This is needed because whatever is in column B doesn't contain actual values. it's Just a formula that requires Columns C and D to exist
   
   8. Now select Columns B, C, and D and delete them
     a. OPTIONAL: Move column S to column B
@@ -44,11 +45,11 @@ Steps:
     f. Click "Replace all"
     e. Click Done
     
-  10. Now we have to replace the empty cells in the "Intructor" column with actual names
+  10. Now we have to replace the empty cells in the "Instructor" column with actual names
     a. Use this tutorial: https://infoinspired.com/google-docs/spreadsheet/fill-blank-cells-with-the-values-above/
     
   11. Now download the file as a csv
   
-  12. Refer to Readme.text for further instruction
+  12. Refer to README.text for further instruction
     
     
