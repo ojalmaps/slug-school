@@ -118,8 +118,8 @@ class GetProfInfo extends StatelessWidget {
                   
                   Text(numAs.toString() + " A's"),
                   Text(numBs.toString() + " B's"),
-                  Text(numCs.toString() + " C's"),
-                  Text(data["D"].toString() + " Ds"),
+                  // Text(numCs.toString() + " C's"),
+                  // Text(data["D"].toString() + " Ds"),
                   // Text(data["F"].toString() + " Fs"),
                 ],
               ),
@@ -164,7 +164,7 @@ class _ProfPageState extends State<ProfPage> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body: Center(child: GetProfInfo(test2)),
+      body: Center(child: GetProfInfo(this.prof.name)),
     );
   }
 }
