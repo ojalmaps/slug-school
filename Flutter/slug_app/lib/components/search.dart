@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import '../screens/profpages.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -88,8 +89,16 @@ class _SearchState extends State<Search> {
               itemCount: resultsList.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                return Text(
-                  resultsList[index],
+                return TextButton(
+                  child: Text(resultsList[index]),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => ProfPage(
+                                  Professor(resultsList[index], "Fall2011"), )
+                               ));
+                  }
                 );
               },
             ),

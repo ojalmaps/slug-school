@@ -58,8 +58,14 @@ class SlugThemes {
   // Large text object
   TextStyle largeText(){
     return new TextStyle(
+      fontWeight: FontWeight.w500,
       fontSize: 36,
-      backgroundColor: this.secondary,
+      background: Paint()
+        ..strokeWidth = 30
+        ..color = this.secondary
+        ..style = PaintingStyle.stroke
+        ..strokeJoin = StrokeJoin.round
+      ,
       color: Colors.black
     );
   }
@@ -67,7 +73,12 @@ class SlugThemes {
   TextStyle medText(){
     return new TextStyle(
       fontSize: 24,
-      backgroundColor: this.accentTwo,
+      background: Paint()
+        ..strokeWidth = 30
+        ..color = this.accentTwo
+        ..style = PaintingStyle.stroke
+        ..strokeJoin = StrokeJoin.round
+      ,
       color: Colors.black
     );
   }

@@ -13,25 +13,12 @@ import 'package:csv/csv.dart' as csv;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-List<String> prof_inf = ["Abdollahian,Yashar", "CHEM- 1N", "Gen Chem Lab"];
-List<int> p_grades = [0, 113, 37, 28, 74, 12, 5, 11, 3, 1, 0, 0, 1];
-// Convert the csv file to a list
-// List <List> csvToList(File myCsvFile){
-//   csv.CsvToListConverter c = new csv.CsvToListConverter();
-//   List<List> listCreated = c.convert(myCsvFile.readAsStringSync());
-//   return listCreated;
-// }
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   runApp(MyApp());
 }
 
-// final ThemeData _themeData = new ThemeData(
-//   brightness: Brightness.dark,
-//   primarySwatch: Colors.blue,
-//   accentColor: Colors.yellow
-// );
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
