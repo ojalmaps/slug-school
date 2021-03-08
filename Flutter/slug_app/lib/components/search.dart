@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:sandbox/theme/themes.dart';
 import '../screens/profpages.dart';
 
 class Search extends StatefulWidget {
@@ -90,7 +91,8 @@ class _SearchState extends State<Search> {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 return TextButton(
-                  child: Text(resultsList[index]),
+                  child: Text(resultsList[index], style: SlugThemes().medText(),),
+                  
                   onPressed: () {
                     Navigator.push(
                         context,

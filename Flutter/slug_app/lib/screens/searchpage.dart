@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/search.dart';
+import '../theme/themes.dart';
 
 class SearchPage extends StatelessWidget {
   static const String _title = 'Search';
@@ -9,10 +10,11 @@ class SearchPage extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: Search(),
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        backgroundColor: Colors.blueGrey[50],
-      ),
+      // theme: ThemeData(
+      //   brightness: Brightness.dark,
+      //   backgroundColor: Colors.blueGrey[50],
+      // ),
+      theme: SlugThemes().getSlugTheme(),
     );
   }
 }
