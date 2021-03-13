@@ -54,87 +54,84 @@ class GetProfInfo extends StatelessWidget {
 
           List<Widget> chlds = [
             // Placeholder for Image
-                   Icon(
-                      Icons.account_circle,
-                      size: 300
-                  ),
+            Icon(
+                Icons.account_circle,
+                size: 300
+                ),
             Center( 
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text("Name: " + documentId, style: stheme.largeText(),),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text(dept, style: stheme.largeText(),),
-                  ),
-                ],
-              ),
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text("Name: " + documentId, style: stheme.largeText(),),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text(dept, style: stheme.largeText(),),
+                    ),
+                  ],
+                ),
             ),
             Divider(
               height: 50,
               thickness: 10,
               indent: 65,
               endIndent: 65,
-              color: SlugThemes().accentOne,
+              color: stheme.accentOne,
             ),
-            Card(
-              borderOnForeground: true,
-              color: SlugThemes().accentTwo,
-              elevation: 1000,
-              shadowColor: Colors.black,
-              child: Column(
-                children: [
-                  // Course title and Catalog number
-                  Text("Course Title: " + data["Course Title"], style: stheme.largeText(),),
-                  Text("Subject-Catalog Number: " + data["Subject-Catalog Number"], style: stheme.medText(),),
-                
-                  // The grade dist
-                  Text("Grade Distribution", style: stheme.medText(),),
-                  // Text(passRate.toString()),
-                  // Text("About " + (passRate * 100).toInt().toString() + "% of students passed with a B or better."),
-                  // Row(
-                  //   mainAxisSize: MainAxisSize.min,
-                  //   children: [
-                  //     Container(
-                  //       child: Divider(
-                  //         color: Colors.green,
-                  //         thickness: 25,
-                  //         height: 30,
-                  //         ),
-                  //       width: passRate * 300
-                  //     ),
-                  //     Container(
-                  //       child: Divider(
-                  //         color: Colors.red,
-                  //         thickness: 25,
-                  //         height: 30,
-                  //         ),
-                  //       width: (1-passRate) * 300,
-                  //     ),],
-                  // ),
-                  
-                  Text(numAs.toString() + " A's"),
-                  Text(numBs.toString() + " B's"),
-                  // Text(numCs.toString() + " C's"),
-                  // Text(data["D"].toString() + " Ds"),
-                  // Text(data["F"].toString() + " Fs"),
-                ],
-              ),
-            ),
-            
-            
 
-            
-            
+              Card(
+                  borderOnForeground: true,
+                  color: stheme.accentTwo,
+                  elevation: 1000,
+                  shadowColor: Colors.black,
+                  
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Course title and Catalog number
+                        Text("Course Title: " + data["Course Title"], style: stheme.largeText(),),
+                        Text("Subject-Catalog Number: " + data["Subject-Catalog Number"], style: stheme.medText(),),
+                        Text("Grade Distribution", style: stheme.medText(),),
+                        Text("About " + (passRate * 100).toInt().toString() + "% of students passed with a B or better."),
+                        // Pass percentage graphic
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              child: Divider(
+                                color: Colors.green,
+                                thickness: 25,
+                                height: 30,
+                                ),
+                              width: passRate * 300
+                            ),
+                            Container(
+                              child: Divider(
+                                color: Colors.red,
+                                thickness: 25,
+                                height: 30,
+                                ),
+                              width: (1-passRate) * 300,
+                            ),],
+                        ),
+                        // The grade dist
+                        Text(numAs.toString() + " A's",),
+                        Text(numBs.toString() + " B's",),
+                        Text(numCs.toString() + " C's"),
+                        Text(data["D"].toString() + " Ds"),
+                        Text(data["F"].toString() + " Fs"),
+                        
+                        
+                        ],
+                    ),
+                ),              
           ];
-          return Column(
-            children: chlds,
+
+          return ListView(children: chlds,);
             // mainAxisAlignment: MainAxisAlignment.center,
             // crossAxisAlignment: CrossAxisAlignment.center,
-            );
         }
 
         return Text("loading");
