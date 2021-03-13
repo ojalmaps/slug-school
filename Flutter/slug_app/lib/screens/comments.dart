@@ -27,6 +27,8 @@ class CommentsPageState extends State<CommentsPage> {
     return ListView.builder(itemBuilder: (context, index) {
       if (index < _comments.length) {
         return _buildCommentItem(_comments[index]);
+      } else {
+        return Text("No Available Comments");
       }
     });
   }
@@ -37,6 +39,7 @@ class CommentsPageState extends State<CommentsPage> {
         _buildFirebaseComment(result.data());
       });
     });
+    return Text("Comments Printed");
   }
 
   Widget _buildCommentItem(String comment) {

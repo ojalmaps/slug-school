@@ -5,6 +5,7 @@ import 'theme/themes.dart';
 import 'screens/profpages.dart';
 
 import 'screens/searchpage.dart';
+import 'screens/comments.dart';
 // import 'dart:io';
 import 'package:path/path.dart';
 import 'package:excel/excel.dart';
@@ -18,7 +19,6 @@ void main() {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -159,6 +159,32 @@ class _MyHomePageState extends State<MyHomePage> {
             textColor: Colors.white,
           ),
           MaterialButton(
+            // button to redirect to comments
+            elevation: 0,
+            height: 50,
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => CommentsPage()));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Dummy Comments',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )
+              ],
+            ),
+            textColor: Colors.white,
+          ),
+          MaterialButton(
               child: Row(
                 children: <Widget>[
                   Text(
@@ -192,7 +218,6 @@ class FailPage extends StatefulWidget {
 }
 
 class _FailPageState extends State<FailPage> {
-  
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -202,17 +227,17 @@ class _FailPageState extends State<FailPage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-       body: Column(children: [
-         Text("The Connection with firestore failed!", 
-         style: new TextStyle(fontSize: 36),
-         ),
-       ],),
+      body: Column(
+        children: [
+          Text(
+            "The Connection with firestore failed!",
+            style: new TextStyle(fontSize: 36),
+          ),
+        ],
+      ),
     );
   }
 }
-
-
-
 
 class App extends StatelessWidget {
   // Create the initialization Future outside of `build`:
