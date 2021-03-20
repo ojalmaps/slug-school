@@ -1,3 +1,5 @@
+import 'dart:html';
+import 'dart:math';
 import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 
@@ -81,6 +83,36 @@ class SlugThemes {
       ,
       color: Colors.black
     );
+  }
+
+}
+
+// Use custom painter for making background cirles
+class CirclePainter extends CustomPainter{
+  @override
+  void paint(Canvas canvas, Size size){
+    final center = Offset(size.width / 2, size.height / 2);
+
+    final paint = Paint()
+      ..color = Colors.blue
+      ..strokeWidth = 10
+      ..style = PaintingStyle.fill;
+    int x = 0;
+    while(x < 10){
+        
+    }
+    
+    canvas.drawCircle(
+      center,
+      size.width * 1/4, 
+      paint,
+      );
+
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate){
+    return false;
   }
 
 }
