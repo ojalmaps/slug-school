@@ -54,7 +54,8 @@ class CommentsPageState extends State<CommentsPage> {
   Widget build(BuildContext contect) {
     return Scaffold(
         appBar: new AppBar(title: Text("Comments")),
-        body: Column(children: <Widget>[
+        body: Column(
+          children: <Widget>[
           Expanded(child: _buildCommentList()),
           Expanded(child: _buildFirebaseComments()),
           TextField(
