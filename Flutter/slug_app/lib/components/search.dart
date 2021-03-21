@@ -15,7 +15,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   TextEditingController searchController = TextEditingController();
-  CollectionReference profs = FirebaseFirestore.instance.collection('Fall2011');
+  CollectionReference profs = FirebaseFirestore.instance.collection('Fall2011_Perfect');
   List allResults = [];
   List resultsList = [];
 
@@ -98,7 +98,7 @@ class _SearchState extends State<Search> {
                         context,
                         MaterialPageRoute(
                             builder: (_) => ProfPage(
-                                  Professor(resultsList[index], "Fall2011"), )
+                                  Professor(resultsList[index], "Fall2011_Perfect"), )
                                ));
                   }
                 );

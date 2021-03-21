@@ -10,7 +10,6 @@ import 'package:flutter/rendering.dart';
 import '../theme/themes.dart';
 import 'coursepages.dart';
 import 'package:path/path.dart';
-import 'package:excel/excel.dart';
 
 
 // A class to store and organize data about UCSC courses
