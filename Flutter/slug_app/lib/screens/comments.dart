@@ -15,6 +15,8 @@ class CommentsPage extends StatefulWidget {
 
 class CommentsPageState extends State<CommentsPage> {
   List<String> _comments = [];
+  var com;
+  final commentController = new TextEditingController();
 
   void _addComment(String val) {
     setState(() {
@@ -33,13 +35,12 @@ class CommentsPageState extends State<CommentsPage> {
     });
   }
 
-  Widget _buildFirebaseComments() {
+  void _buildFirebaseComments() {
     comments.get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
         _buildFirebaseComment(result.data());
       });
     });
-    return Text("Comments Printed");
   }
 
   Widget _buildCommentItem(String comment) {
@@ -52,19 +53,25 @@ class CommentsPageState extends State<CommentsPage> {
 
   @override
   Widget build(BuildContext contect) {
+    _buildFirebaseComments();
     return Scaffold(
         appBar: new AppBar(title: Text("Comments")),
-        body: Column(
-          children: <Widget>[
-          Expanded(child: _buildCommentList()),
-          Expanded(child: _buildFirebaseComments()),
+        body: Column(children: <Widget>[
+          //Expanded(child: _buildCommentList()),
           TextField(
-            onSubmitted: (String submittedStr) {
-              _addComment(submittedStr);
+            controller: commentController,
+            decoration: InputDecoration(hintText: 'Add a comment!'),
+          ),
+          RaisedButton(
+            onPressed: () {
+              setState(() {
+                com = commentController.text;
+                comments.add({"comments": com});
+              });
             },
-            decoration:
-                InputDecoration(contentPadding: const EdgeInsets.all(20.0)),
-          )
+            child: Text('Submit'),
+          ),
+          Text("Your comment: $com")
         ]));
   }
 }
