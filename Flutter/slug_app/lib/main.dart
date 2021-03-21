@@ -8,7 +8,6 @@ import 'screens/searchpage.dart';
 import 'screens/comments.dart';
 // import 'dart:io';
 import 'package:path/path.dart';
-import 'package:excel/excel.dart';
 import 'package:csv/csv.dart' as csv;
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
@@ -129,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     context,
                     MaterialPageRoute(
                         builder: (_) => ProfPage(
-                              Professor("Abbink,Emily K.", "Fall2011"),
+                              Professor("Abbink, Emily K.", "Fall2011"),
                             )));
               }),
           MaterialButton(
