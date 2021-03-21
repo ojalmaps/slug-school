@@ -28,7 +28,7 @@ class _SearchState extends State<Search> {
     profs.get().then((QuerySnapshot querySnapshot) => {
           querySnapshot.docs.forEach((doc) {
             // allResults.add(doc["Course Title"]);  // add course names to list
-            allResults.add(doc.id);  // add professor names to list
+            allResults.add(doc.id); // add professor names to list
           })
         });
 
@@ -91,17 +91,18 @@ class _SearchState extends State<Search> {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 return TextButton(
-                  child: Text(resultsList[index], style: SlugThemes().medText(),),
-                  
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => ProfPage(
-                                  Professor(resultsList[index], "Fall2011"), )
-                               ));
-                  }
-                );
+                    child: Text(
+                      resultsList[index],
+                      style: SlugThemes().medText(),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => ProfPage(
+                                    Professor(resultsList[index], "Fall2011"),
+                                  )));
+                    });
               },
             ),
           )

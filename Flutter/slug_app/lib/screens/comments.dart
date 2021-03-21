@@ -14,64 +14,65 @@ class CommentsPage extends StatefulWidget {
 }
 
 class CommentsPageState extends State<CommentsPage> {
-  List<String> _comments = [];
   var com;
+  List fireComments = [];
   final commentController = new TextEditingController();
 
-  void _addComment(String val) {
-    setState(() {
-      _comments.add(val);
-    });
-    comments.add({"comments": val});
-  }
-
-  Widget _buildCommentList() {
+  Widget _buildFirebaseComments() {
+    print("first build");
+    print("inside of build: $fireComments");
     return ListView.builder(itemBuilder: (context, index) {
-      if (index < _comments.length) {
-        return _buildCommentItem(_comments[index]);
-      } else {
-        return Text("No Available Comments");
+      //if (index < fireComments.length) {
+      //  print("building item");
+      //  return _buildCommentItem(fireComments[index]);
+      //} else {
+      //  return Text("No Available Comments");
+      //}
+      while (index < fireComments.length) {
+        return _buildCommentItem(fireComments[index]);
       }
     });
   }
 
-  void _buildFirebaseComments() {
+  List _findFirebaseComments() {
     comments.get().then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        _buildFirebaseComment(result.data());
+      querySnapshot.docs.forEach((doc) {
+        fireComments.add(doc["comment"]);
+        print(fireComments);
       });
     });
+    return fireComments;
   }
 
   Widget _buildCommentItem(String comment) {
     return ListTile(title: Text(comment));
   }
 
-  Widget _buildFirebaseComment(Map<String, dynamic> comment) {
-    return ListTile(title: Text(comment[0]));
-  }
-
   @override
-  Widget build(BuildContext contect) {
-    _buildFirebaseComments();
+  Widget build(BuildContext context) {
+    _findFirebaseComments();
     return Scaffold(
         appBar: new AppBar(title: Text("Comments")),
         body: Column(children: <Widget>[
-          //Expanded(child: _buildCommentList()),
+          Expanded(child: _buildFirebaseComments()),
+          //Text(fireComments.toString()),
           TextField(
             controller: commentController,
             decoration: InputDecoration(hintText: 'Add a comment!'),
           ),
-          RaisedButton(
+          ElevatedButton(
             onPressed: () {
               setState(() {
                 com = commentController.text;
-                comments.add({"comments": com});
+                comments.add({"comment": com});
               });
+              //_findFirebaseComments();
+              //Text(fireComments.toString());
             },
             child: Text('Submit'),
           ),
-          Text("Your comment: $com")
+          Text("Your comment: $com"),
+          //_buildFirebaseComments()
         ]));
   }
 }
