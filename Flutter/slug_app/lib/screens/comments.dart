@@ -19,15 +19,7 @@ class CommentsPageState extends State<CommentsPage> {
   final commentController = new TextEditingController();
 
   Widget _buildFirebaseComments() {
-    print("first build");
-    print("inside of build: $fireComments");
     return ListView.builder(itemBuilder: (context, index) {
-      //if (index < fireComments.length) {
-      //  print("building item");
-      //  return _buildCommentItem(fireComments[index]);
-      //} else {
-      //  return Text("No Available Comments");
-      //}
       while (index < fireComments.length) {
         return _buildCommentItem(fireComments[index]);
       }
@@ -50,29 +42,48 @@ class CommentsPageState extends State<CommentsPage> {
 
   @override
   Widget build(BuildContext context) {
-    _findFirebaseComments();
-    return Scaffold(
+    return new Scaffold(
         appBar: new AppBar(title: Text("Comments")),
-        body: Column(children: <Widget>[
-          Expanded(child: _buildFirebaseComments()),
-          //Text(fireComments.toString()),
-          TextField(
-            controller: commentController,
-            decoration: InputDecoration(hintText: 'Add a comment!'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                com = commentController.text;
-                comments.add({"comment": com});
-              });
-              //_findFirebaseComments();
-              //Text(fireComments.toString());
-            },
-            child: Text('Submit'),
-          ),
-          Text("Your comment: $com"),
-          //_buildFirebaseComments()
-        ]));
+        body: Column(
+          children: <Widget>[
+            Flexible(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: comments.snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text("Something went wrong");
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+                  return new ListView(
+                    children:
+                        snapshot.data.docs.map((DocumentSnapshot document) {
+                      return new ListTile(
+                          title: new Text(document.data()["comment"]));
+                    }).toList(),
+                  );
+                },
+              ),
+            ),
+            TextField(
+              controller: commentController,
+              decoration: InputDecoration(hintText: 'Add a comment!'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  com = commentController.text;
+                  commentController.clear();
+                  comments.add({"comment": com});
+                });
+                //_findFirebaseComments();
+                //Text(fireComments.toString());
+              },
+              child: Text('Submit'),
+            ),
+          ],
+        ));
   }
 }
