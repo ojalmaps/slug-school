@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sandbox/screens/coursepages.dart';
-import 'package:sandbox/screens/verytTempCommentStreamTest.dart';
 import 'screens/login.dart';
 import 'theme/themes.dart';
 import 'screens/profpages.dart';
 
 import 'screens/searchpage.dart';
 import 'screens/comments.dart';
-import 'screens/graphpage.dart';
 // import 'dart:io';
 import 'package:path/path.dart';
 import 'package:csv/csv.dart' as csv;
@@ -186,32 +184,6 @@ class _MyHomePageState extends State<MyHomePage> {
             textColor: Colors.white,
           ),
           MaterialButton(
-            // button to redirect to comments
-            elevation: 0,
-            height: 50,
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => CommentStream()));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Dummy Comment Stream Test',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                )
-              ],
-            ),
-            textColor: Colors.white,
-          ),
-          MaterialButton(
               child: Row(
                 children: <Widget>[
                   Text(
@@ -230,32 +202,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               Course("Fall2011_CourseNumber", "CMPS- 5J"),
                             )));
               }),
-          MaterialButton(
-            // button to redirect to graph page
-            elevation: 0,
-            height: 50,
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => GraphPage()));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Testing Page for Bar Graphs',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                )
-              ],
-            ),
-            textColor: Colors.white,
-          ),
         ],
       ),
     );
