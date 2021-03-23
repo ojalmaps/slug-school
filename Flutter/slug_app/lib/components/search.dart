@@ -58,7 +58,7 @@ class _SearchState extends State<Search> {
     if (searchController.text != "") {
       for (var query in allResults) {
         var title = query.toLowerCase();
-        if (title.startsWith(searchController.text.toLowerCase())) {
+        if (title.contains(searchController.text.toLowerCase())) {
           showResults.add(query);
         }
       }
