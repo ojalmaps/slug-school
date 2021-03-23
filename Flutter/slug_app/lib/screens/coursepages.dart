@@ -10,24 +10,21 @@ import 'package:flutter/rendering.dart';
 import '../theme/themes.dart';
 import 'coursepages.dart';
 import 'package:path/path.dart';
-
+import '../components/graph.dart';
 
 // A class to store and organize data about UCSC courses
-class Course{
-    String colID; // Collection ID in firestore
-    String docID; // Document ID in firestore
-    String profName; // Professor name
-    String title;
-    Map <String, int> grades; // Map for grade dist
+class Course {
+  String colID; // Collection ID in firestore
+  String docID; // Document ID in firestore
+  String profName; // Professor name
+  String title;
+  Map<String, int> grades; // Map for grade dist
 
-
-    Course(String col, String doc){
-      this.colID = col;
-      this.docID = doc;
+  Course(String col, String doc) {
+    this.colID = col;
+    this.docID = doc;
   }
-
 }
-
 
 // Given the professors name as a string as it appears in the spreadsheets
 // get the data from firestore and return a Column of the info
@@ -35,19 +32,18 @@ class Course{
 class GetCourseInfo extends StatelessWidget {
   // A course as input
   final Course crs;
-  
 
   GetCourseInfo(this.crs);
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference users = FirebaseFirestore.instance.collection(crs.colID);
+    CollectionReference users =
+        FirebaseFirestore.instance.collection(crs.colID);
 
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(crs.docID).get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-
         if (snapshot.hasError) {
           return Text("Something went wrong");
         }
@@ -60,35 +56,55 @@ class GetCourseInfo extends StatelessWidget {
           crs.grades['A'] = data['A'] + data["A+"] + data['A-'];
           crs.grades['B'] = data['B'] + data["B+"] + data['B-'];
           crs.grades['C'] = data['C'] + data["C+"];
+          crs.grades['D'] = data['D'];
+          crs.grades['F'] = data['F'];
           crs.grades['FAIL'] = data['D'] + data['F'];
           crs.profName = data["Instructor"];
           crs.title = data["Course Title"];
 
           List<Widget> chlds = [
             Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(crs.title, style: stheme.largeText(),),
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                crs.title,
+                style: stheme.largeText(),
+              ),
             ),
 
             // Placeholder for Image
-            Icon(
-              Icons.account_box_rounded, 
-              size: 200.0
-            ),
+            Icon(Icons.account_box_rounded, size: 200.0),
 
             // Course title and Catalog number
-            Text("Professor: " + crs.profName, style: stheme.medText(),),
-            Text("Subject-Catalog Number: " + crs.docID, style: stheme.medText(),),
+            Text(
+              "Professor: " + crs.profName,
+              style: stheme.medText(),
+            ),
+            Text(
+              "Subject-Catalog Number: " + crs.docID,
+              style: stheme.medText(),
+            ),
 
             // // The grade dist
-            Text("Grade Distribution", style: stheme.medText(),),
+            Text(
+              "Grade Distribution",
+              style: stheme.medText(),
+            ),
             Text(crs.grades['A'].toString() + " A's"),
             Text(crs.grades['B'].toString() + " B's"),
             Text(crs.grades['C'].toString() + " C's"),
             Text(crs.grades['FAIL'].toString() + " D's / F's"),
-            
+
+            // Display grade distribution as a bar graph within container
+            Container(
+              height: 200,
+              width: 150,
+              child: Graph(crs.grades['A'], crs.grades['B'], crs.grades['C'],
+                  crs.grades['D'], crs.grades['F']),
+            ),
           ];
-          return Column(children: chlds,);
+          return Column(
+            children: chlds,
+          );
         }
         // Default to loading
         return Text("loading");
@@ -97,17 +113,15 @@ class GetCourseInfo extends StatelessWidget {
   }
 }
 
+class CoursePage extends StatefulWidget {
+  // Professor
+  final Course crs;
+  // Constructor
+  CoursePage(this.crs);
 
-class CoursePage extends StatefulWidget{
-    // Professor
-    final Course crs;
-    // Constructor
-    CoursePage(this.crs);
-    
-    // Call abo
-    @override
-    _CoursePageState createState() => _CoursePageState(this.crs);
-
+  // Call abo
+  @override
+  _CoursePageState createState() => _CoursePageState(this.crs);
 }
 
 class _CoursePageState extends State<CoursePage> {
@@ -117,7 +131,7 @@ class _CoursePageState extends State<CoursePage> {
   _CoursePageState(this.crs);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(child: GetCourseInfo(this.crs)),
     );
