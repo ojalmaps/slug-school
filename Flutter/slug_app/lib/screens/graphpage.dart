@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../components/graph.dart';
-import '../theme/themes.dart';
 
 class GraphPage extends StatelessWidget {
   static const String _title = 'Bar Graph';
@@ -9,8 +8,10 @@ class GraphPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home: Graph(),
-      theme: SlugThemes().getSlugTheme(),
+      home: Graph(10, 29, 8, 17, 3),
+      theme: ThemeData(
+        backgroundColor: Colors.blueGrey[50],
+      ),
     );
   }
 }

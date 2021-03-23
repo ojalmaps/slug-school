@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../theme/themes.dart';
 import 'package:load/load.dart';
-
+import '../components/graph.dart';
 
 // Future<bool> checkIfDocExists(String colID, String docId) async {
 //   try {
@@ -26,7 +26,7 @@ import 'package:load/load.dart';
 //   final String collectionID;
 
 //   ProfCourse(this.documentId, this.collectionID);
-  
+
 //   @override
 //   State createState() => ProfCourseState(this.documentId, this.collectionID);
 
@@ -46,7 +46,6 @@ import 'package:load/load.dart';
 //     this.exists = doc.exists;
 //     super.initState();
 //   }
-  
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -60,7 +59,7 @@ import 'package:load/load.dart';
 //       future: users.doc(documentId).get(),
 //       builder:
 //           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        
+
 //         if (snapshot.hasError) {
 //           return Text("Something went wrong");
 //         }
@@ -120,8 +119,8 @@ import 'package:load/load.dart';
 //                         Text(data["F"].toString() + " Fs"),
 //                         ],
 //                     ),
-//                 ), 
-//               ); 
+//                 ),
+//               );
 //         }
 //         return Text("loading");
 //       },
@@ -129,67 +128,86 @@ import 'package:load/load.dart';
 //   }
 // }
 
-class CreateCourseWidg extends StatelessWidget{
+class CreateCourseWidg extends StatelessWidget {
   final List<dynamic> stats;
 
   CreateCourseWidg(this.stats);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     SlugThemes stheme = new SlugThemes();
     int numAs = stats[2] + stats[3] + stats[3];
     int numBs = stats[5] + stats[6] + stats[7];
     int numCs = stats[8] + stats[9];
+    int numDs = stats[10];
+    int numFs = stats[11];
     int fails = stats[10] + stats[11];
     double passRate = (numAs + numBs) / (numAs + numBs + numCs + fails);
-    return  Padding(
-        padding: EdgeInsets.all(24),
-        child: Card(
-            borderOnForeground: true,
-            color: stheme.accentTwo,
-            elevation: 1000,
-            shadowColor: Colors.black,
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Course title and Catalog number
-                  Text("Course Title: " + stats[1], style: stheme.largeText(),),
-                  Text("Subject-Catalog Number: " + stats[0], style: stheme.medText(),),
-                  Text("Grade Distribution", style: stheme.medText(),),
-                  Text("About " + (passRate * 100).toInt().toString() + "% of students passed with a B or better."),
-                  // Pass percentage graphic
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        child: Divider(
-                          color: Colors.green,
-                          thickness: 25,
-                          height: 30,
-                          ),
-                        width: passRate * 300
-                      ),
-                      Container(
-                        child: Divider(
-                          color: Colors.red,
-                          thickness: 25,
-                          height: 30,
-                          ),
-                        width: (1-passRate) * 300,
-                      ),],
-                  ),
-                  // The grade dist
-                  Text(numAs.toString() + " A's",),
-                  Text(numBs.toString() + " B's",),
-                  Text(numCs.toString() + " C's"),
-                  Text(stats[10].toString() + " Ds"),
-                  Text(stats[11].toString() + " Fs"),
-                  ],
-              ),
-          ), 
-        );    
+    return Padding(
+      padding: EdgeInsets.all(24),
+      child: Card(
+        borderOnForeground: true,
+        color: stheme.accentTwo,
+        elevation: 1000,
+        shadowColor: Colors.black,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Course title and Catalog number
+            Text(
+              "Course Title: " + stats[1],
+              style: stheme.largeText(),
+            ),
+            Text(
+              "Subject-Catalog Number: " + stats[0],
+              style: stheme.medText(),
+            ),
+            Text(
+              "Grade Distribution",
+              style: stheme.medText(),
+            ),
+            Text("About " +
+                (passRate * 100).toInt().toString() +
+                "% of students passed with a B or better."),
+            // Pass percentage graphic
+            // Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     Container(
+            //       child: Divider(
+            //         color: Colors.green,
+            //         thickness: 25,
+            //         height: 30,
+            //         ),
+            //       width: passRate * 300
+            //     ),
+            //     Container(
+            //       child: Divider(
+            //         color: Colors.red,
+            //         thickness: 25,
+            //         height: 30,
+            //         ),
+            //       width: (1-passRate) * 300,
+            //     ),],
+            // ),
+            // // The grade dist
+            // Text(numAs.toString() + " A's",),
+            // Text(numBs.toString() + " B's",),
+            // Text(numCs.toString() + " C's"),
+            // Text(stats[10].toString() + " Ds"),
+            // Text(stats[11].toString() + " Fs"),
+            
+            // Display grade distribution as a bar graph within container
+            Container(
+              height: 200,
+              width: 150,
+              child: Graph(numAs, numBs, numCs, numDs, numFs),
+            ),
+          ],
+        ),
+      ),
+    );
   }
-
 }
 
 // Given the professors name as a string as it appears in the spreadsheets
@@ -202,13 +220,13 @@ class GetProfInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference users = FirebaseFirestore.instance.collection('Fall2011_Perfect');
+    CollectionReference users =
+        FirebaseFirestore.instance.collection('Fall2011_Perfect');
 
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(documentId).get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-
         if (snapshot.hasError) {
           return Text("Something went wrong");
         }
@@ -218,38 +236,40 @@ class GetProfInfo extends StatelessWidget {
           List<Widget> pclasses = [];
           String dept = "";
           Map<String, dynamic> data = snapshot.data.data();
-          for (String d in data.keys){
+          for (String d in data.keys) {
             dynamic curr = data[d];
-            if (curr is String){
+            if (curr is String) {
               continue;
-            }
-            else if (curr is List<dynamic>){
-              if(dept.length == 0) dept = curr[0];
+            } else if (curr is List<dynamic>) {
+              if (dept.length == 0) dept = curr[0];
               pclasses.add(CreateCourseWidg(curr));
             }
           }
           dept = "Department: " + dept.substring(0, dept.indexOf("-"));
           List<Widget> chlds = [
             // Placeholder for Image
-            Icon(
-                Icons.account_circle,
-                size: 300
-                ),
+            Icon(Icons.account_circle, size: 300),
             // Professor name and Department
-            Center( 
+            Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                    Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text("Name: " + documentId, style: stheme.largeText(),),
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Name: " + documentId,
+                      style: stheme.largeText(),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text(dept, style: stheme.largeText(),),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      dept,
+                      style: stheme.largeText(),
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
             ),
             // Aesthetic divider
             Divider(
@@ -259,10 +279,11 @@ class GetProfInfo extends StatelessWidget {
               endIndent: 65,
               color: stheme.accentOne,
             ),
-
           ];
           chlds = chlds + pclasses;
-          return ListView(children: chlds,);
+          return ListView(
+            children: chlds,
+          );
         }
         return Text("loading");
       },
@@ -270,15 +291,14 @@ class GetProfInfo extends StatelessWidget {
   }
 }
 
-class ProfPage extends StatefulWidget{
-    // Professor
-    final Professor prof;
+class ProfPage extends StatefulWidget {
+  // Professor
+  final Professor prof;
 
-    ProfPage(this.prof);
-    // 
-    @override
-    _ProfPageState createState() => _ProfPageState(this.prof);
-
+  ProfPage(this.prof);
+  //
+  @override
+  _ProfPageState createState() => _ProfPageState(this.prof);
 }
 
 class _ProfPageState extends State<ProfPage> {
@@ -288,7 +308,7 @@ class _ProfPageState extends State<ProfPage> {
   _ProfPageState(this.prof);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(child: GetProfInfo(this.prof.name)),
     );
@@ -296,15 +316,15 @@ class _ProfPageState extends State<ProfPage> {
 }
 
 // Class to represent a professor
-class Professor{
-  String name;  // Name (Document ID from firestore)
+class Professor {
+  String name; // Name (Document ID from firestore)
   String colID; // Collection ID (Year and quarter of the data ex. "Fall2011")
-  Image pic;    // Image of professor to be displayed
+  Image pic; // Image of professor to be displayed
 
   // A list with the course data, may not be used
-  List<dynamic> courseInfo; 
+  List<dynamic> courseInfo;
 
-  Professor(String docID, String collectionID){
+  Professor(String docID, String collectionID) {
     this.name = docID;
     this.colID = collectionID;
   }
