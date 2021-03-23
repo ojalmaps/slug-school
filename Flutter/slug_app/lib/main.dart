@@ -6,6 +6,7 @@ import 'screens/profpages.dart';
 
 import 'screens/searchpage.dart';
 import 'screens/comments.dart';
+import 'screens/graphpage.dart';
 // import 'dart:io';
 import 'package:path/path.dart';
 import 'package:csv/csv.dart' as csv;
@@ -202,6 +203,32 @@ class _MyHomePageState extends State<MyHomePage> {
                               Course("Fall2011_CourseNumber", "CMPS- 5J"),
                             )));
               }),
+            MaterialButton(
+            // button to redirect to graph page
+            elevation: 0,
+            height: 50,
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => GraphPage()));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Testing Page for Bar Graphs',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )
+              ],
+            ),
+            textColor: Colors.white,
+          ),
         ],
       ),
     );
