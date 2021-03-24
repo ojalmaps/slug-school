@@ -48,7 +48,9 @@ class CommentsPageState extends State<CommentsPage> {
           children: <Widget>[
             Flexible(
               child: StreamBuilder<QuerySnapshot>(
-                stream: comments.snapshots(),
+                stream: comments
+                    .orderBy("timestamp", descending: false)
+                    .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
@@ -76,7 +78,10 @@ class CommentsPageState extends State<CommentsPage> {
                 setState(() {
                   com = commentController.text;
                   commentController.clear();
-                  comments.add({"comment": com});
+                  comments.add({
+                    "comment": com,
+                    "timestamp": FieldValue.serverTimestamp()
+                  });
                 });
                 //_findFirebaseComments();
                 //Text(fireComments.toString());
