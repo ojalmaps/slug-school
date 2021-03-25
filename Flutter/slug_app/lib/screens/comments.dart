@@ -10,10 +10,10 @@ CollectionReference comments =
 
 class CommentsPage extends StatefulWidget {
   @override
-  createState() => new CommentsPageState();
+  createState() => new CommentsPageStateOriginal();
 }
 
-class CommentsPageState extends State<CommentsPage> {
+class CommentsPageStateOriginal extends State<CommentsPage> {
   var com;
   List fireComments = [];
   final commentController = new TextEditingController();

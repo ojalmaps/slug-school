@@ -196,7 +196,7 @@ class CreateCourseWidg extends StatelessWidget {
             // Text(numCs.toString() + " C's"),
             // Text(stats[10].toString() + " Ds"),
             // Text(stats[11].toString() + " Fs"),
-            
+
             // Display grade distribution as a bar graph within container
             Container(
               height: 200,
@@ -288,6 +288,64 @@ class GetProfInfo extends StatelessWidget {
         return Text("loading");
       },
     );
+  }
+}
+
+class GetCommentSection extends StatelessWidget {
+  CollectionReference comments =
+      FirebaseFirestore.instance.collection('comments');
+
+  var com;
+  final commentController = new TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        appBar: new AppBar(title: Text("Comments")),
+        body: Column(
+          children: <Widget>[
+            Flexible(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: comments
+                    .orderBy("timestamp", descending: false)
+                    .snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text("Something went wrong");
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+                  return new ListView(
+                    children:
+                        snapshot.data.docs.map((DocumentSnapshot document) {
+                      return new ListTile(
+                          title: new Text(document.data()["comment"]));
+                    }).toList(),
+                  );
+                },
+              ),
+            ),
+            TextField(
+              controller: commentController,
+              decoration: InputDecoration(hintText: 'Add a comment!'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                com = commentController.text;
+                commentController.clear();
+                comments.add({
+                  "comment": com,
+                  "timestamp": FieldValue.serverTimestamp()
+                });
+                //_findFirebaseComments();
+                //Text(fireComments.toString());
+              },
+              child: Text('Submit'),
+            ),
+          ],
+        ));
   }
 }
 
