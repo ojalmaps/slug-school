@@ -211,13 +211,17 @@ class CreateCourseWidg extends StatelessWidget {
 }
 
 class GetCommentSection extends StatelessWidget {
-  final CollectionReference comments =
-      FirebaseFirestore.instance.collection('comments');
+  final String documentId;
+  GetCommentSection(this.documentId);
 
   final commentController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final CollectionReference comments = FirebaseFirestore.instance
+        .collection('Fall2011_Perfect')
+        .doc(documentId)
+        .collection('prof_comments');
     return new Expanded(
         child: SizedBox(
             height: 600.0,
@@ -338,7 +342,7 @@ class GetProfInfo extends StatelessWidget {
               color: stheme.accentOne,
             ),
           ];
-          chlds = chlds + pclasses + [GetCommentSection()];
+          chlds = chlds + pclasses + [GetCommentSection(documentId)];
           return ListView(
             children: chlds,
           );
