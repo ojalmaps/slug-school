@@ -148,7 +148,7 @@ class CreateCourseWidg extends StatelessWidget {
       child: Card(
         borderOnForeground: true,
         color: stheme.accentTwo,
-        elevation: 1000,
+        elevation: 600,
         shadowColor: Colors.black,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -220,7 +220,7 @@ class GetCommentSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Expanded(
         child: SizedBox(
-            height: 1000.0,
+            height: 600.0,
             child: Column(
               children: <Widget>[
                 Flexible(

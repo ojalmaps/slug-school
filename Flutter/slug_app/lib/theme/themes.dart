@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 // Color scheme
 // FROM: https://colorpalettes.net/color-palette-1944/
 
-
-
 // Color primaryColor = Color(0xFF203277);
 Color secondColor = Color(0xFFE0D030);
 Color accentOne = Color(0xFF6385BB);
@@ -39,55 +37,50 @@ class SlugThemes {
 
   // Don't need a real constructor becuase values are static
   SlugThemes();
-  
+
   // ThemeData
-  ThemeData getSlugTheme(){
+  ThemeData getSlugTheme() {
     return new ThemeData(
-      brightness: Brightness.dark,
-      primarySwatch: this.primary,
-      accentColor: this.secondary,
-      buttonColor: this.secondary,
-      scaffoldBackgroundColor: this.primary,
-      unselectedWidgetColor: this.accentOne,
-      selectedRowColor: this.accentThree,
-      hoverColor: this.secondary
-    );
+        brightness: Brightness.dark,
+        primarySwatch: this.primary,
+        accentColor: this.secondary,
+        buttonColor: this.secondary,
+        scaffoldBackgroundColor: this.primary,
+        unselectedWidgetColor: this.accentOne,
+        selectedRowColor: this.accentThree,
+        hoverColor: this.secondary);
   }
 
   // Large text object
-  TextStyle largeText(){
+  TextStyle largeText() {
     return new TextStyle(
-      fontWeight: FontWeight.w500,
-      fontSize: 36,
-      background: Paint()
-        ..strokeWidth = 30
-        ..color = this.secondary
-        ..style = PaintingStyle.stroke
-        ..strokeJoin = StrokeJoin.round
-      ,
-      color: Colors.black
-    );
-  }
-  // Medium text object
-  TextStyle medText(){
-    return new TextStyle(
-      fontSize: 24,
-      background: Paint()
-        ..strokeWidth = 30
-        ..color = this.accentTwo
-        ..style = PaintingStyle.stroke
-        ..strokeJoin = StrokeJoin.round
-      ,
-      color: Colors.black
-    );
+        fontWeight: FontWeight.w500,
+        fontSize: 36,
+        background: Paint()
+          ..strokeWidth = 50 //changed these to try and fix formatting issues
+          ..color = this.secondary
+          ..style = PaintingStyle.stroke
+          ..strokeJoin = StrokeJoin.miter,
+        color: Colors.black);
   }
 
+  // Medium text object
+  TextStyle medText() {
+    return new TextStyle(
+        fontSize: 24,
+        background: Paint()
+          ..strokeWidth = 0 //changed these to try and fix formatting issues
+          ..color = this.accentTwo
+          ..style = PaintingStyle.stroke
+          ..strokeJoin = StrokeJoin.miter,
+        color: Colors.black);
+  }
 }
 
 // Use custom painter for making background cirles
-class CirclePainter extends CustomPainter{
+class CirclePainter extends CustomPainter {
   @override
-  void paint(Canvas canvas, Size size){
+  void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
 
     final paint = Paint()
@@ -95,22 +88,17 @@ class CirclePainter extends CustomPainter{
       ..strokeWidth = 10
       ..style = PaintingStyle.fill;
     int x = 0;
-    while(x < 10){
-        
-    }
-    
+    while (x < 10) {}
+
     canvas.drawCircle(
       center,
-      size.width * 1/4, 
+      size.width * 1 / 4,
       paint,
-      );
-
+    );
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate){
+  bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
-
 }
-
