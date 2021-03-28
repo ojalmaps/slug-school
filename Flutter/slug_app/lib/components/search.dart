@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'dart:math';
 import 'package:sandbox/theme/themes.dart';
 import '../screens/profpages.dart';
 
@@ -70,7 +70,8 @@ class _SearchState extends State<Search> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
+      appBar: new AppBar(title: Text("Search")),
       body: Column(
         children: <Widget>[
           Padding(
@@ -88,7 +89,7 @@ class _SearchState extends State<Search> {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.only(left: 60),
-              itemCount: resultsList.length,
+              itemCount: min(resultsList.length, 20),  // limit to only display <= 20 results
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 return TextButton(
