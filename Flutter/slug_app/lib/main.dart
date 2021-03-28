@@ -3,7 +3,7 @@ import 'package:sandbox/screens/coursepages.dart';
 import 'screens/login.dart';
 import 'theme/themes.dart';
 import 'screens/profpages.dart';
-
+import 'screens/formpage.dart';
 import 'screens/searchpage.dart';
 import 'screens/comments.dart';
 // import 'dart:io';
@@ -172,6 +172,32 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Dummy Comments',
                   style: TextStyle(
                     color: Colors.black,
+                    fontSize: 14,
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )
+              ],
+            ),
+            textColor: Colors.white,
+          ),
+          MaterialButton(
+            // button to redirect to html form page
+            elevation: 0,
+            height: 50,
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => FormPage()));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Test HTML Form Page',
+                  style: TextStyle(
+                    color: Colors.white,
                     fontSize: 14,
                   ),
                 ),

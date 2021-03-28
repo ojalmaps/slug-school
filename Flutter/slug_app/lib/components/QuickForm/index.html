@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-database.js"></script>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Anonymous Rating Form</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="brand"><span>Rate</span> Your Experience</h1>
+    <div class="wrapper">
+      <div class="rating-description">
+        <br>
+        <ul>
+          <li><i class="fa fa-desc"></i>Please assign values as applicable:</li>  <br>
+          <li><i class="fa fa-5"></i> 5 - Excellent</li>
+          <li><i class="fa fa-4"></i> 4 - Good</li>
+          <li><i class="fa fa-3"></i> 3 - Average</li>
+          <li><i class="fa fa-2"></i> 2 - Below Average</li>
+          <li><i class="fa fa-1"></i> 1 - Poor</li>
+        </ul>
+      </div>
+      <div class="questions">
+        <div class="alert">Your message has been sent</div>
+        <form id = "quickForm">
+          <p>
+            <label>How difficult is this course overall? (5 is hardest)</label>
+            <input type="number" step="1" pattern="\d+" min="1" max="5"  name="overall1" id = "overall1" required>
+          </p>
+          <p>
+            <label>How much did you enjoy this course?</label>
+            <input type="number" step="1" pattern="\d+" min="1" max="5" name="enjoyment1" id = "enjoyment1" required>
+          </p>
+          <p>
+            <label>How heavy is the workload?</label>
+            <input type="number" step="1" pattern="\d+" min="1" max="5" name="workload1" id = "workload1" required>
+          </p>
+          <p>
+            <label>How knowledgeable/prepared is the professor?</label>
+            <input type="number" step="1" pattern="\d+" min="1" max="5" name="prepared1" id = "prepared1" required>
+          </p>
+          <p>
+            <label>How helpful is the professor?</label>
+            <input type="number" step="1" pattern="\d+" min="1" max="5"  name="helpful1" id = "helpful1" required>
+          </p>
+          <p class = "full">
+            <label>Describe your experience:</label>
+            <textarea name = "experience1" rows = "1" maxlength=1000 id = "experience1" ></textarea>
+          </p>
+            <button type = "submit" value="Submit">Submit</button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+  <script src = "main.js"></script>
+ 
+</body>
+</html>
