@@ -7,10 +7,12 @@
 // the dependencies included in the pubspec.yaml file (since flutter_html and flutter_webview)
 // seem to be mutually exclusive
 
+import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
-import '../components/form.dart';
+// import '../components/form.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/image_render.dart';
+import 'package:flutter_html/style.dart';
+import 'package:hexcolor/hexcolor.dart';
 // import 'dart:js';
 // import 'dart:html' as html;
 // import 'dart:ui' as ui;
@@ -52,7 +54,7 @@ class FormPage extends StatelessWidget {
           <title>Anonymous Rating Form</title>
           <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
-          <link rel="stylesheet" href="../components/QuickForm/style.css">
+          
         </head>
         <body>
           <div class="container">
@@ -107,14 +109,87 @@ class FormPage extends StatelessWidget {
 
         </body>
         </html>
-        """,
-    );
+        """, 
+      style: {
+        "body": Style(
+          backgroundColor:  Colors.blue.shade100,
+          color: Colors.white,
+          fontFamily: 'Segoe UI',
+          padding: EdgeInsets.all(1),
+        ),
+
+        "container": Style(
+          width: 1170,
+          padding: EdgeInsets.all(1),
+        ),
+
+        "ul": Style(
+          padding: EdgeInsets.all(0),
+        ),
+
+        "brand": Style(
+          textAlign: TextAlign.center,
+        ),
+
+        "brand span": Style(
+          color: Colors.white,
+        ),
+
+        // "wrapper": Style(
+        //   textShadow: Shadow(offset: 0, ),
+
+        // )
+
+        "wrapper > *": Style(
+          padding: EdgeInsets.all(1),
+        ),
+
+        "rating-description": Style(
+          backgroundColor: Colors.lightBlue.shade100,
+        ),
+
+        "rating-description h3, rating-description ul": Style(
+          textAlign: TextAlign.left,
+          padding: const EdgeInsets.only(
+            left: 0,
+            top: 0,
+            right: 0,
+            bottom: 1,
+          ),
+        ),
+
+        "questions": Style(
+          backgroundColor: Colors.lightBlue.shade50,
+        ),
+
+        "contact form": Style(
+          display: Display.INLINE,
+        ),
+
+        "contact form label": Style(
+          display: Display.BLOCK,
+        ),
+
+        "contact form button, contact form input, contact form textarea": Style(
+          padding: EdgeInsets.all(1),
+          border: Border.all(
+            color: Colors.lightBlue.shade100,
+            width: 1,
+            style: BorderStyle.solid,
+          )
+        ),
+
+
+    });
 
     return MaterialApp(
       title: _title,
       home: Container(
         child: html,
         color: Colors.blueGrey,
+        // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        height: 300,
+        width: 300,
       ),
     );
   }
