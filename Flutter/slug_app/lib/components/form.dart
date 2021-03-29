@@ -1,30 +1,42 @@
 // Trevor: I implemented the dropdown window for form input from the following documentation:
 //        https://api.flutter.dev/flutter/material/DropdownButton-class.html
+//        https://www.youtube.com/watch?v=XuxpCYyrKoE
 
 // Component to display an anonymous form within the website, without
 // redirecting to another page in Flutter
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
 class AnonForm extends StatefulWidget {
+  final String collection, doc;
+  AnonForm(this.collection, this.doc);
+
   @override
-  FormState createState() => FormState();
+  FormState createState() => FormState(collection, doc);
 }
 
 class FormState extends State<AnonForm> {
-  List choices = ['5', '4', '3', '2', '1'];
+  final String collection, doc;
+  FormState(this.collection, this.doc);
 
-  String difficulty = '3';
-  String enjoyment = '3';
-  String workload = '3';
-  String preparedness = '3';
-  String helpfulness = '3';
-  
+  List choices = ['5', '4', '3', '2', '1', ''];
+
+  String difficulty = '';
+  String enjoyment = '';
+  String workload = '';
+  String preparedness = '';
+  String helpfulness = '';
+
   final description = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final CollectionReference formData = FirebaseFirestore.instance
+        .collection(collection)
+        .doc(doc)
+        .collection('form_data');
+
     return SizedBox(
       height: 250,
       width: 850,
@@ -47,7 +59,8 @@ class FormState extends State<AnonForm> {
                       Expanded(
                           flex: 4,
                           child: Container(
-                              height: 800,  // have to hardcode the height for since the container doesn't do it automatically??
+                              height:
+                                  800, // have to hardcode the height for since the container doesn't do it automatically??
                               padding: EdgeInsets.all(20),
                               color: Colors.teal.shade100,
                               child: Column(
@@ -83,13 +96,13 @@ class FormState extends State<AnonForm> {
                       Expanded(
                         flex: 6,
                         child: Container(
-                            height: 800,  // have to hardcode the height for since the container doesn't do it automatically??
+                            height:
+                                800, // have to hardcode the height for since the container doesn't do it automatically??
                             padding: EdgeInsets.all(20),
                             color: Colors.green.shade100,
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
-
                                 children: <Widget>[
                                   Row(
                                     children: [
@@ -102,8 +115,10 @@ class FormState extends State<AnonForm> {
                                         width: 31,
                                         height: 15,
                                         child: DropdownButton(
-                                          iconSize: 0,  // make the array smaller (not sure why it still shows though)
-                                          underline: SizedBox(),  // make the underline invisible
+                                          iconSize:
+                                              0, // make the array smaller (not sure why it still shows though)
+                                          underline:
+                                              SizedBox(), // make the underline invisible
                                           value: difficulty,
                                           onChanged: (newValue) {
                                             setState(() {
@@ -112,12 +127,14 @@ class FormState extends State<AnonForm> {
                                           },
                                           style: TextStyle(
                                             fontSize: 12,
-
                                           ),
                                           items: choices.map((choice) {
                                             return DropdownMenuItem(
                                               value: choice,
-                                              child: Text(choice, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis),
+                                              child: Text(choice,
+                                                  textAlign: TextAlign.center,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
                                             );
                                           }).toList(),
                                         ),
@@ -135,8 +152,10 @@ class FormState extends State<AnonForm> {
                                         width: 31,
                                         height: 15,
                                         child: DropdownButton(
-                                          iconSize: 0,  // make the array smaller (not sure why it still shows though)
-                                          underline: SizedBox(),  // make the underline invisible
+                                          iconSize:
+                                              0, // make the array smaller (not sure why it still shows though)
+                                          underline:
+                                              SizedBox(), // make the underline invisible
                                           value: enjoyment,
                                           onChanged: (newValue) {
                                             setState(() {
@@ -145,12 +164,14 @@ class FormState extends State<AnonForm> {
                                           },
                                           style: TextStyle(
                                             fontSize: 12,
-
                                           ),
                                           items: choices.map((choice) {
                                             return DropdownMenuItem(
                                               value: choice,
-                                              child: Text(choice, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis),
+                                              child: Text(choice,
+                                                  textAlign: TextAlign.center,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
                                             );
                                           }).toList(),
                                         ),
@@ -168,8 +189,10 @@ class FormState extends State<AnonForm> {
                                         width: 31,
                                         height: 15,
                                         child: DropdownButton(
-                                          iconSize: 0,  // make the array smaller (not sure why it still shows though)
-                                          underline: SizedBox(),  // make the underline invisible
+                                          iconSize:
+                                              0, // make the array smaller (not sure why it still shows though)
+                                          underline:
+                                              SizedBox(), // make the underline invisible
                                           value: workload,
                                           onChanged: (newValue) {
                                             setState(() {
@@ -178,12 +201,14 @@ class FormState extends State<AnonForm> {
                                           },
                                           style: TextStyle(
                                             fontSize: 12,
-
                                           ),
                                           items: choices.map((choice) {
                                             return DropdownMenuItem(
                                               value: choice,
-                                              child: Text(choice, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis),
+                                              child: Text(choice,
+                                                  textAlign: TextAlign.center,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
                                             );
                                           }).toList(),
                                         ),
@@ -201,8 +226,10 @@ class FormState extends State<AnonForm> {
                                         width: 31,
                                         height: 15,
                                         child: DropdownButton(
-                                          iconSize: 0,  // make the array smaller (not sure why it still shows though)
-                                          underline: SizedBox(),  // make the underline invisible
+                                          iconSize:
+                                              0, // make the array smaller (not sure why it still shows though)
+                                          underline:
+                                              SizedBox(), // make the underline invisible
                                           value: preparedness,
                                           onChanged: (newValue) {
                                             setState(() {
@@ -211,12 +238,14 @@ class FormState extends State<AnonForm> {
                                           },
                                           style: TextStyle(
                                             fontSize: 12,
-
                                           ),
                                           items: choices.map((choice) {
                                             return DropdownMenuItem(
                                               value: choice,
-                                              child: Text(choice, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis),
+                                              child: Text(choice,
+                                                  textAlign: TextAlign.center,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
                                             );
                                           }).toList(),
                                         ),
@@ -234,8 +263,10 @@ class FormState extends State<AnonForm> {
                                         width: 31,
                                         height: 15,
                                         child: DropdownButton(
-                                          iconSize: 0,  // make the array smaller (not sure why it still shows though)
-                                          underline: SizedBox(),  // make the underline invisible
+                                          iconSize:
+                                              0, // make the array smaller (not sure why it still shows though)
+                                          underline:
+                                              SizedBox(), // make the underline invisible
                                           value: helpfulness,
                                           onChanged: (newValue) {
                                             setState(() {
@@ -244,12 +275,14 @@ class FormState extends State<AnonForm> {
                                           },
                                           style: TextStyle(
                                             fontSize: 12,
-
                                           ),
                                           items: choices.map((choice) {
                                             return DropdownMenuItem(
                                               value: choice,
-                                              child: Text(choice, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis),
+                                              child: Text(choice,
+                                                  textAlign: TextAlign.center,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
                                             );
                                           }).toList(),
                                         ),
@@ -264,55 +297,113 @@ class FormState extends State<AnonForm> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       Container(
-                                        width: 200,
-                                        height: 15,
-                                        child: SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: ConstrainedBox(
-                                            constraints: BoxConstraints.expand(width: 1000),
-                                            child: TextField(
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                height: 2,
+                                          width: 200,
+                                          height: 15,
+                                          child: SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: ConstrainedBox(
+                                              constraints:
+                                                  BoxConstraints.expand(
+                                                      width: 1000),
+                                              child: TextField(
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  height: 2,
+                                                ),
+                                                controller: description,
                                               ),
-                                              controller: description,
                                             ),
-                                          ),
-                                        )
-                                      )
+                                          ))
                                     ],
                                   ),
-                                  Text(''),  // empty new line
-                                  
+                                  Text(''), // empty new line
+
                                   Container(
                                     width: 60,
                                     height: 16,
-                                  
                                     child: ElevatedButton(
-                                      
                                       onPressed: () {
-                                        setState(() {
-                                          // comments.add({
-                                          //   "comment": com,
-                                          //   "timestamp": FieldValue.serverTimestamp()
-                                          // });
+                                        if (difficulty != '' &&
+                                            enjoyment != '' &&
+                                            workload != '' &&
+                                            preparedness != '' &&
+                                            helpfulness != '') {
+                                          setState(() {
+                                            int diffTotal =
+                                                int.parse(difficulty);
+                                            int enjoyTotal =
+                                                int.parse(enjoyment);
+                                            int workTotal = int.parse(workload);
+                                            int prepTotal =
+                                                int.parse(preparedness);
+                                            int helpTotal =
+                                                int.parse(helpfulness);
 
-                                          // reset values
-                                          difficulty = '3';
-                                          enjoyment = '3';
-                                          workload = '3';
-                                          preparedness = '3';
-                                          helpfulness = '3';
-                                          description.clear(); 
-                                        });
+                                            print("diffTotal is " +
+                                                diffTotal.toString());
+
+                                            formData.doc('data').get().then(
+                                                (DocumentSnapshot
+                                                    documentSnapshot) {
+                                              if (documentSnapshot.exists) {
+                                                print("previous diff was " +
+                                                    documentSnapshot
+                                                        .data()["difficulty"]);
+                                                diffTotal = diffTotal +
+                                                    int.parse(documentSnapshot
+                                                        .data()["difficulty"]);
+                                                print(
+                                                    "diffTotal is NOW updated to" +
+                                                        diffTotal.toString());
+                                                enjoyTotal = enjoyTotal +
+                                                    int.parse(documentSnapshot
+                                                        .data()["enjoyment"]);
+                                                workTotal = workTotal +
+                                                    int.parse(documentSnapshot
+                                                        .data()["workload"]);
+                                                prepTotal = prepTotal +
+                                                    int.parse(
+                                                        documentSnapshot.data()[
+                                                            "preparedness"]);
+                                                helpTotal = helpTotal +
+                                                    int.parse(documentSnapshot
+                                                        .data()["helpfulness"]);
+                                              }
+                                            });
+
+                                            formData.doc("data").set({
+                                              "difficulty": diffTotal,
+                                              "enjoyment": enjoyTotal,
+                                              "workload": workTotal,
+                                              "preparedness": prepTotal,
+                                              "helpfulness": helpTotal,
+                                            });
+
+                                            if (description.text != '') {
+                                              formData.add({
+                                                "description": description.text,
+                                                "timestamp": FieldValue.serverTimestamp()
+                                              });
+                                            }
+
+                                            // reset values
+                                            difficulty = '';
+                                            enjoyment = '';
+                                            workload = '';
+                                            preparedness = '';
+                                            helpfulness = '';
+                                            description.clear();
+                                          });
+                                        } else {
+                                          print(
+                                              "One or more of the fields are empty. Failed to submit.");
+                                        }
                                       },
-                                      child: Text('Submit', style: TextStyle(fontSize: 10)),
+                                      child: Text('Submit',
+                                          style: TextStyle(fontSize: 10)),
                                     ),
                                   ),
-                                ]
-                              )
-                            ),
-                      
+                                ])),
                       )
                     ],
                   )))

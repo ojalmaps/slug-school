@@ -89,10 +89,10 @@ class LoginScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Image.asset(
-          'assets/tgd_white.png',
-          height: 40,
-        ),
+        // Image.asset(
+        //   'assets/tgd_white.png',
+        //   height: 40,
+        // ),
         Text('Slug School',
             textAlign: TextAlign.center,
             style: TextStyle(
