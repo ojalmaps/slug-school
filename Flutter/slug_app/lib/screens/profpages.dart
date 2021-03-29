@@ -391,3 +391,17 @@ class Professor {
     this.colID = collectionID;
   }
 }
+
+
+
+  // Linking this data to anonymous form
+  // The following code creates the an_form subcollection in firestore. 
+  //  final CollectionReference an_comments = FirebaseFirestore.instance
+  //       .collection('Fall2011_Perfect')
+  //       .doc(documentId)
+  //       .collection('an_form');  
+  //       var an_com = an_commentController.text;                       // creates variable to temp store the text                          
+  //                   an_commentController.clear();                                 
+  //                   an_form.add({                                  // an_comments : subcollection 
+  //                     "value1": an_val1,
+  //                   });
