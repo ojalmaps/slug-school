@@ -7,14 +7,11 @@ import 'package:flutter/rendering.dart';
 import '../theme/themes.dart';
 import '../components/graph.dart';
 import '../components/form.dart';
-import '../components/search.dart';
 
 class CreateCourseWidg extends StatelessWidget {
   final List<dynamic> stats;
-  final String profName;
-  final String collectionName;
 
-  CreateCourseWidg(this.stats, this.collectionName, this.profName);
+  CreateCourseWidg(this.stats);
 
   @override
   Widget build(BuildContext context) {
@@ -87,10 +84,6 @@ class CreateCourseWidg extends StatelessWidget {
               child: Graph(numAs, numBs, numCs, numDs, numFs),
             ),
             Text(''),  // spaceholder (new line)
-            Container(
-              width: 600,
-              child: AnonForm(collectionName, profName),
-            ),
           ],
         ),
       ),
@@ -200,7 +193,7 @@ class GetProfInfo extends StatelessWidget {
               continue;
             } else if (curr is List<dynamic>) {
               if (dept.length == 0) dept = curr[0];
-              pclasses.add(CreateCourseWidg(curr, collectionName, documentId));
+              pclasses.add(CreateCourseWidg(curr));
             }
           }
           dept = "Department: " + dept.substring(0, dept.indexOf("-"));
@@ -240,7 +233,14 @@ class GetProfInfo extends StatelessWidget {
               color: stheme.accentOne,
             ),
           ];
-          chlds = chlds + pclasses + [GetCommentSection(documentId)];
+          chlds = chlds + pclasses + 
+            [Padding(
+              padding: EdgeInsets.symmetric(horizontal: 250, vertical: 2),
+              child: Container(
+              width: 600,
+              child: AnonForm(collectionName, documentId),
+            ),),] +
+            [GetCommentSection(documentId)];
           return ListView(
             children: chlds,
           );

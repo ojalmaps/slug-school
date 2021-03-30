@@ -47,26 +47,32 @@ class FormState extends State<AnonForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Row(
-            children: [
-              Text(
-                "  Rate Your Experience",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: stheme.primary,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "       (1: Poor, 5: Excellent)",
-                textAlign: TextAlign.right,
-                style: TextStyle(fontSize: 10, color: Colors.black, height: 2),
-              ),
-            ],
+          Card(
+            borderOnForeground: true,
+            color: stheme.secondary,
+            elevation: 600,
+            shadowColor: Colors.black,
+            child: Row(
+              children: [
+                Text(
+                  "  Rate Your Experience",
+                  textAlign: TextAlign.left,
+                  style: stheme.medText(),
+                ),
+                Text(
+                  "       (1: Poor, 5: Excellent)",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(fontSize: 10, color: Colors.black, height: 2),
+                ),
+              ],
+            ),
           ),
+        
+
+          
           Card(
             elevation: 40,
-            color: stheme.accentOne,
+            color: stheme.accentTwo,
             child: Padding(
                 padding: EdgeInsets.all(20),
                 child: Column(
