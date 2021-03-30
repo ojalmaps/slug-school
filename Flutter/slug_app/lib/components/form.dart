@@ -41,6 +41,7 @@ class FormState extends State<AnonForm> {
       height: 250,
       width: 850,
       child: Column(
+        
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -49,9 +50,8 @@ class FormState extends State<AnonForm> {
             textAlign: TextAlign.left,
             style: TextStyle(fontSize: 18, color: Colors.teal),
           ),
-          Container(
-              height: 180,
-              width: 750,
+          Padding(
+            padding: EdgeInsets.all(12),
               child: Card(
                   elevation: 40,
                   child: Row(
@@ -59,9 +59,7 @@ class FormState extends State<AnonForm> {
                       Expanded(
                           flex: 4,
                           child: Container(
-                              height:
-                                  800, // have to hardcode the height for since the container doesn't do it automatically??
-                              padding: EdgeInsets.all(20),
+                              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                               color: Colors.teal.shade100,
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,9 +94,7 @@ class FormState extends State<AnonForm> {
                       Expanded(
                         flex: 6,
                         child: Container(
-                            height:
-                                800, // have to hardcode the height for since the container doesn't do it automatically??
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                             color: Colors.green.shade100,
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,8 +113,6 @@ class FormState extends State<AnonForm> {
                                         child: DropdownButton(
                                           iconSize:
                                               0, // make the array smaller (not sure why it still shows though)
-                                          underline:
-                                              SizedBox(), // make the underline invisible
                                           value: difficulty,
                                           onChanged: (newValue) {
                                             setState(() {
@@ -154,8 +148,6 @@ class FormState extends State<AnonForm> {
                                         child: DropdownButton(
                                           iconSize:
                                               0, // make the array smaller (not sure why it still shows though)
-                                          underline:
-                                              SizedBox(), // make the underline invisible
                                           value: enjoyment,
                                           onChanged: (newValue) {
                                             setState(() {
@@ -191,8 +183,6 @@ class FormState extends State<AnonForm> {
                                         child: DropdownButton(
                                           iconSize:
                                               0, // make the array smaller (not sure why it still shows though)
-                                          underline:
-                                              SizedBox(), // make the underline invisible
                                           value: workload,
                                           onChanged: (newValue) {
                                             setState(() {
@@ -228,8 +218,6 @@ class FormState extends State<AnonForm> {
                                         child: DropdownButton(
                                           iconSize:
                                               0, // make the array smaller (not sure why it still shows though)
-                                          underline:
-                                              SizedBox(), // make the underline invisible
                                           value: preparedness,
                                           onChanged: (newValue) {
                                             setState(() {
@@ -265,8 +253,6 @@ class FormState extends State<AnonForm> {
                                         child: DropdownButton(
                                           iconSize:
                                               0, // make the array smaller (not sure why it still shows though)
-                                          underline:
-                                              SizedBox(), // make the underline invisible
                                           value: helpfulness,
                                           onChanged: (newValue) {
                                             setState(() {
