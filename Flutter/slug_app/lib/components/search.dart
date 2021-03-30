@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_html/style.dart';
 import 'dart:math';
 import 'package:sandbox/theme/themes.dart';
 import '../screens/profpages.dart';
@@ -28,7 +29,6 @@ class _SearchState extends State<Search> {
     // professors names to allResults list
     profs.get().then((QuerySnapshot querySnapshot) => {
           querySnapshot.docs.forEach((doc) {
-            // allResults.add(doc["Course Title"]);  // add course names to list
             allResults.add(doc.id); // add professor names to list
           })
         });
@@ -71,19 +71,15 @@ class _SearchState extends State<Search> {
 
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: Text("Search")),
       body: Column(
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 30, right: 30, top: 15),
-            child: Text("Search for a course and/or professor: ",
-                style: TextStyle(fontSize: 20)),
-          ),
+          Text('', style: TextStyle(fontSize: 10),),  // spaceholder (new line)
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
             child: TextFormField(
               controller: searchController,
-              decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
+              decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: ' Search'),
+              
             ),
           ),
           Expanded(

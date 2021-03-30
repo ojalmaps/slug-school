@@ -63,6 +63,11 @@ class GetCourseInfo extends StatelessWidget {
           crs.title = data["Course Title"];
 
           List<Widget> chlds = [
+            // appbar that contains back button
+            AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,),
+              
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(

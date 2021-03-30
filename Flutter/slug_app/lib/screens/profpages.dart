@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import '../theme/themes.dart';
 import '../components/graph.dart';
 import '../components/form.dart';
+import '../components/search.dart';
 
 class CreateCourseWidg extends StatelessWidget {
   final List<dynamic> stats;
@@ -204,6 +205,11 @@ class GetProfInfo extends StatelessWidget {
           }
           dept = "Department: " + dept.substring(0, dept.indexOf("-"));
           List<Widget> chlds = [
+            // appbar that contains back button
+            AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,),
+
             // Placeholder for Image
             Icon(Icons.account_circle, size: 300),
             // Professor name and Department
