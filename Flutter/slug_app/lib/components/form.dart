@@ -7,6 +7,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../theme/themes.dart';
 
 class AnonForm extends StatefulWidget {
   final String collection, doc;
@@ -32,367 +33,295 @@ class FormState extends State<AnonForm> {
 
   @override
   Widget build(BuildContext context) {
+    SlugThemes stheme = new SlugThemes();
+
     final CollectionReference formData = FirebaseFirestore.instance
         .collection(collection)
         .doc(doc)
         .collection('form_data');
 
-    return SizedBox(
+    return Container(
       height: 250,
-      width: 850,
+      width: 1000,
       child: Column(
-        
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(
-            "  Rate Your Experience",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 18, color: Colors.teal),
+          Row(
+            children: [
+              Text(
+                "  Rate Your Experience",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    fontSize: 18,
+                    color: stheme.primary,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "       (1: Poor, 5: Excellent)",
+                textAlign: TextAlign.right,
+                style: TextStyle(fontSize: 10, color: Colors.black, height: 2),
+              ),
+            ],
           ),
-          Padding(
-            padding: EdgeInsets.all(12),
-              child: Card(
-                  elevation: 40,
-                  child: Row(
+          Card(
+            elevation: 40,
+            color: stheme.accentOne,
+            child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Expanded(
-                          flex: 4,
-                          child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                              color: Colors.teal.shade100,
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    Text(
-                                      'Please assign values as applicable:',
-                                      textAlign: TextAlign.left,
-                                    ),
-                                    Text(''),
-                                    Text(
-                                      '5 - Excellent',
-                                      textAlign: TextAlign.left,
-                                    ),
-                                    Text(
-                                      '4 - Good',
-                                      textAlign: TextAlign.left,
-                                    ),
-                                    Text(
-                                      '3 - Average',
-                                      textAlign: TextAlign.left,
-                                    ),
-                                    Text(
-                                      '2 - Below Average',
-                                      textAlign: TextAlign.left,
-                                    ),
-                                    Text(
-                                      '1 - Poor',
-                                      textAlign: TextAlign.left,
-                                    ),
-                                  ]))),
-                      Expanded(
-                        flex: 6,
-                        child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                            color: Colors.green.shade100,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'How difficult is this course overall? (5 is hardest)  ',
-                                        textAlign: TextAlign.left,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Container(
-                                        width: 31,
-                                        height: 15,
-                                        child: DropdownButton(
-                                          iconSize:
-                                              0, // make the array smaller (not sure why it still shows though)
-                                          value: difficulty,
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              difficulty = newValue;
-                                            });
-                                          },
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                          items: choices.map((choice) {
-                                            return DropdownMenuItem(
-                                              value: choice,
-                                              child: Text(choice,
-                                                  textAlign: TextAlign.center,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'How much did you enjoy this course?  ',
-                                        textAlign: TextAlign.left,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Container(
-                                        width: 31,
-                                        height: 15,
-                                        child: DropdownButton(
-                                          iconSize:
-                                              0, // make the array smaller (not sure why it still shows though)
-                                          value: enjoyment,
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              enjoyment = newValue;
-                                            });
-                                          },
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                          items: choices.map((choice) {
-                                            return DropdownMenuItem(
-                                              value: choice,
-                                              child: Text(choice,
-                                                  textAlign: TextAlign.center,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'How heavy is the workload?  ',
-                                        textAlign: TextAlign.left,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Container(
-                                        width: 31,
-                                        height: 15,
-                                        child: DropdownButton(
-                                          iconSize:
-                                              0, // make the array smaller (not sure why it still shows though)
-                                          value: workload,
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              workload = newValue;
-                                            });
-                                          },
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                          items: choices.map((choice) {
-                                            return DropdownMenuItem(
-                                              value: choice,
-                                              child: Text(choice,
-                                                  textAlign: TextAlign.center,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'How knowledgeable/prepared is the professor?  ',
-                                        textAlign: TextAlign.left,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Container(
-                                        width: 31,
-                                        height: 15,
-                                        child: DropdownButton(
-                                          iconSize:
-                                              0, // make the array smaller (not sure why it still shows though)
-                                          value: preparedness,
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              preparedness = newValue;
-                                            });
-                                          },
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                          items: choices.map((choice) {
-                                            return DropdownMenuItem(
-                                              value: choice,
-                                              child: Text(choice,
-                                                  textAlign: TextAlign.center,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'How helpful is the professor?  ',
-                                        textAlign: TextAlign.left,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Container(
-                                        width: 31,
-                                        height: 15,
-                                        child: DropdownButton(
-                                          iconSize:
-                                              0, // make the array smaller (not sure why it still shows though)
-                                          value: helpfulness,
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              helpfulness = newValue;
-                                            });
-                                          },
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                          items: choices.map((choice) {
-                                            return DropdownMenuItem(
-                                              value: choice,
-                                              child: Text(choice,
-                                                  textAlign: TextAlign.center,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Describe your experience:  ',
-                                        textAlign: TextAlign.left,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Container(
-                                          width: 200,
-                                          height: 15,
-                                          child: SingleChildScrollView(
-                                            scrollDirection: Axis.horizontal,
-                                            child: ConstrainedBox(
-                                              constraints:
-                                                  BoxConstraints.expand(
-                                                      width: 1000),
-                                              child: TextField(
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  height: 2,
-                                                ),
-                                                controller: description,
-                                              ),
-                                            ),
-                                          ))
-                                    ],
-                                  ),
-                                  Text(''), // empty new line
+                      Row(
+                        children: [
+                          Text(
+                            'How difficult is this course overall? (5 is hardest)  ',
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Container(
+                            width: 35,
+                            height: 20,
+                            child: DropdownButton(
+                              dropdownColor: Colors.blueGrey,
+                              iconSize:
+                                  0, // make the array smaller (not sure why it still shows though)
+                              value: difficulty,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  difficulty = newValue;
+                                });
+                              },
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                              items: choices.map((choice) {
+                                return DropdownMenuItem(
+                                  value: choice,
+                                  child: Text(choice,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'How much did you enjoy this course?  ',
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Container(
+                            width: 35,
+                            height: 20,
+                            child: DropdownButton(
+                              dropdownColor: Colors.blueGrey,
+                              iconSize:
+                                  0, // make the array smaller (not sure why it still shows though)
+                              value: enjoyment,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  enjoyment = newValue;
+                                });
+                              },
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                              items: choices.map((choice) {
+                                return DropdownMenuItem(
+                                  value: choice,
+                                  child: Text(choice,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'How heavy is the workload?  ',
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Container(
+                            width: 35,
+                            height: 20,
+                            child: DropdownButton(
+                              dropdownColor: Colors.blueGrey,
+                              iconSize:
+                                  0, // make the array smaller (not sure why it still shows though)
+                              value: workload,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  workload = newValue;
+                                });
+                              },
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                              items: choices.map((choice) {
+                                return DropdownMenuItem(
+                                  value: choice,
+                                  child: Text(choice,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'How knowledgeable/prepared is the professor?  ',
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Container(
+                            width: 35,
+                            height: 20,
+                            child: DropdownButton(
+                              dropdownColor: Colors.blueGrey,
+                              iconSize:
+                                  0, // make the array smaller (not sure why it still shows though)
+                              value: preparedness,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  preparedness = newValue;
+                                });
+                              },
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                              items: choices.map((choice) {
+                                return DropdownMenuItem(
+                                  value: choice,
+                                  child: Text(choice,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'How helpful is the professor?  ',
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Container(
+                            width: 35,
+                            height: 20,
+                            child: DropdownButton(
+                              dropdownColor: Colors.blueGrey,
+                              iconSize:
+                                  0, // make the array smaller (not sure why it still shows though)
+                              value: helpfulness,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  helpfulness = newValue;
+                                });
+                              },
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                              items: choices.map((choice) {
+                                return DropdownMenuItem(
+                                  value: choice,
+                                  child: Text(choice,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
 
-                                  Container(
-                                    width: 60,
-                                     height: 16,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        if (difficulty != '' &&
-                                            enjoyment != '' &&
-                                            workload != '' &&
-                                            preparedness != '' &&
-                                            helpfulness != '') {
-                                          setState(() {
-                                            int diffTotal =
-                                                int.parse(difficulty);
-                                            int enjoyTotal =
-                                                int.parse(enjoyment);
-                                            int workTotal = int.parse(workload);
-                                            int prepTotal =
-                                                int.parse(preparedness);
-                                            int helpTotal =
-                                                int.parse(helpfulness);
+                      Text(''), // empty new line
 
-                                            print("diffTotal is " +
-                                                diffTotal.toString());
+                      Container(
+                        width: 60,
+                        height: 16,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (difficulty != '' &&
+                                enjoyment != '' &&
+                                workload != '' &&
+                                preparedness != '' &&
+                                helpfulness != '') {
+                              setState(() {
+                                int diffTotal = int.parse(difficulty);
+                                int enjoyTotal = int.parse(enjoyment);
+                                int workTotal = int.parse(workload);
+                                int prepTotal = int.parse(preparedness);
+                                int helpTotal = int.parse(helpfulness);
 
-                                            formData.doc('data').get().then(
-                                                (DocumentSnapshot
-                                                    documentSnapshot) {
-                                              if (documentSnapshot.exists) {
-                                                print("previous diff was " +
-                                                    documentSnapshot
-                                                        .data()["difficulty"]);
-                                                diffTotal = diffTotal +
-                                                    int.parse(documentSnapshot
-                                                        .data()["difficulty"]);
-                                                print(
-                                                    "diffTotal is NOW updated to" +
-                                                        diffTotal.toString());
-                                                enjoyTotal = enjoyTotal +
-                                                    int.parse(documentSnapshot
-                                                        .data()["enjoyment"]);
-                                                workTotal = workTotal +
-                                                    int.parse(documentSnapshot
-                                                        .data()["workload"]);
-                                                prepTotal = prepTotal +
-                                                    int.parse(
-                                                        documentSnapshot.data()[
-                                                            "preparedness"]);
-                                                helpTotal = helpTotal +
-                                                    int.parse(documentSnapshot
-                                                        .data()["helpfulness"]);
-                                              }
-                                            });
+                                print("diffTotal is " + diffTotal.toString());
 
-                                            formData.doc("data").set({
-                                              "difficulty": diffTotal,
-                                              "enjoyment": enjoyTotal,
-                                              "workload": workTotal,
-                                              "preparedness": prepTotal,
-                                              "helpfulness": helpTotal,
-                                            });
+                                formData
+                                    .doc('data')
+                                    .get()
+                                    .then((DocumentSnapshot documentSnapshot) {
+                                  if (documentSnapshot.exists) {
+                                    print("previous diff was " +
+                                        documentSnapshot.data()["difficulty"]);
+                                    diffTotal = diffTotal +
+                                        int.parse(documentSnapshot
+                                            .data()["difficulty"]);
+                                    print("diffTotal is NOW updated to" +
+                                        diffTotal.toString());
+                                    enjoyTotal = enjoyTotal +
+                                        int.parse(documentSnapshot
+                                            .data()["enjoyment"]);
+                                    workTotal = workTotal +
+                                        int.parse(documentSnapshot
+                                            .data()["workload"]);
+                                    prepTotal = prepTotal +
+                                        int.parse(documentSnapshot
+                                            .data()["preparedness"]);
+                                    helpTotal = helpTotal +
+                                        int.parse(documentSnapshot
+                                            .data()["helpfulness"]);
+                                  }
+                                });
 
-                                            if (description.text != '') {
-                                              formData.add({
-                                                "description": description.text,
-                                                "timestamp": FieldValue.serverTimestamp()
-                                              });
-                                            }
+                                formData.doc("data").set({
+                                  "difficulty": diffTotal,
+                                  "enjoyment": enjoyTotal,
+                                  "workload": workTotal,
+                                  "preparedness": prepTotal,
+                                  "helpfulness": helpTotal,
+                                });
 
-                                            // reset values
-                                            difficulty = '';
-                                            enjoyment = '';
-                                            workload = '';
-                                            preparedness = '';
-                                            helpfulness = '';
-                                            description.clear();
-                                          });
-                                        } else {
-                                          print(
-                                              "One or more of the fields are empty. Failed to submit.");
-                                        }
-                                      },
-                                      child: Text('Submit',
-                                          style: TextStyle(fontSize: 10)),
-                                    ),
-                                  ),
-                                ])),
-                      )
-                    ],
-                  )))
+                                // reset values
+                                difficulty = '';
+                                enjoyment = '';
+                                workload = '';
+                                preparedness = '';
+                                helpfulness = '';
+                              });
+                            } else {
+                              print(
+                                  "One or more of the fields are empty. Failed to submit.");
+                            }
+                          },
+                          child: Text('Submit', style: TextStyle(fontSize: 10)),
+                        ),
+                      ),
+                    ])),
+          )
         ],
       ),
     );
