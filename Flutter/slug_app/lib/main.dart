@@ -55,13 +55,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    SlugThemes homeThemes = SlugThemes();
     return CustomPaint(
         painter: MyPainter(),
         child: ListView(
                 
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  AppBar(),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 24.0),
                     child: Text(
@@ -88,11 +88,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   
                   Text(
-                    'An app to help you make important enrollment decisions.',
+                    'An app to help you make enrollment decisions at UC Santa Cruz.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white, 
-                      fontSize: 16,
+                      fontSize: 20,
 
                       ),
                   ),
@@ -101,57 +101,58 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   //Our MaterialButton which when pressed will take us to a new screen named as
                   //LoginScreen
-                  MaterialButton(
-                    elevation: 0,
-                    height: 50,
-                    onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => LoginScreen()));
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Get Started',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 250.0, vertical: 6.0),
+                      child: MaterialButton(
+                        elevation: 0,
+                        height: 50,
+                        onPressed: () {
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (_) => LoginScreen()));
+                        },
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Get Started',
+                                style: homeThemes.homePageButtomTheme(),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.white,
+                              )
+                            ],
                           ),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                    textColor: Colors.white,
+                        textColor: Colors.white,
+                      ),
                   ),
-                  MaterialButton(
-                    // button to redirect to search page
-                    elevation: 0,
-                    height: 50,
-                    onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => SearchPage()));
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Search for Course or Professor',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 250.0, vertical: 6.0),
+                    child: MaterialButton(
+                      // button to redirect to search page
+                      elevation: 0,
+                      height: 50,
+                      onPressed: () {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (_) => SearchPage()));
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Search for Course or Professor',
+                            style: homeThemes.homePageButtomTheme(),
                           ),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                    textColor: Colors.white,
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                      textColor: Colors.white,
+                    )
                   ),
+
                   MaterialButton(
                     // button to redirect to comments
                     elevation: 0,

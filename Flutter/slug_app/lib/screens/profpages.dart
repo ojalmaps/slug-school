@@ -209,9 +209,6 @@ class GetProfInfo extends StatelessWidget {
             AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,),
-
-            // Placeholder for Image
-            Icon(Icons.account_circle, size: 300),
             // Professor name and Department
             Center(
               child: Row(

@@ -79,9 +79,11 @@ class _SearchState extends State<Search> {
             child: TextFormField(
               controller: searchController,
               decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: ' Search'),
-              
+              showCursor: true,
+              cursorColor: SlugThemes().accentThree,
             ),
           ),
+          
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.only(left: 60),
@@ -91,7 +93,7 @@ class _SearchState extends State<Search> {
                 return TextButton(
                     child: Text(
                       resultsList[index],
-                      style: SlugThemes().medText(),
+                      style: SlugThemes().searchTextTheme(),
                     ),
                     onPressed: () {
                       Navigator.push(

@@ -64,8 +64,9 @@ class SlugThemes {
           ..strokeWidth = 50 //changed these to try and fix formatting issues
           ..color = this.secondary
           ..style = PaintingStyle.stroke
-          ..strokeJoin = StrokeJoin.miter,
-        color: Colors.black);
+          ..strokeJoin = StrokeJoin.round,
+        color: Colors.black,
+        );
   }
 
   // Medium text object
@@ -79,6 +80,23 @@ class SlugThemes {
           ..strokeJoin = StrokeJoin.miter,
         color: Colors.black);
   }
+
+  // Buttons on home page
+  TextStyle homePageButtomTheme(){
+    return TextStyle( color: Colors.white, fontSize: 20, fontFamily: "OpenSans");
+  }
+
+  // Search button text theme
+  TextStyle searchTextTheme(){
+    return TextStyle(
+      color: Colors.white,
+      fontSize: 24,
+      fontFamily: "OpenSans",
+      decorationColor: accentTwo,
+      decoration: TextDecoration.underline,
+    );
+  }
+
 }
 
 // Use custom painter for making background cirles
