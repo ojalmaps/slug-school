@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sandbox/theme/themes.dart';
 import '../components/search.dart';
 
 class SearchPage extends StatelessWidget {
@@ -9,8 +10,9 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Search for a course or professor: ",
-                style: TextStyle(fontSize: 20),
-                ),
+                style: SlugThemes().homePageButtomTheme(),
+        ),
+        backgroundColor: SlugThemes().accentOne,
         centerTitle: true,    
         ),
         
