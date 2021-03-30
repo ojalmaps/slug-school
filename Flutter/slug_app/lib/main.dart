@@ -6,9 +6,6 @@ import 'screens/profpages.dart';
 import 'screens/formpage.dart';
 import 'screens/searchpage.dart';
 import 'screens/comments.dart';
-// import 'dart:io';
-import 'package:path/path.dart';
-import 'package:csv/csv.dart' as csv;
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,179 +55,177 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          //We take the image from the assets
-          Image.asset(
-            'images/slug.png',
-            height: 250,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          //Texts and Styling of them
-          Text(
-            'Welcome to Slug School!',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white, fontSize: 28),
-          ),
-          SizedBox(height: 20),
-          Text(
-            'An app to help you make important enrollment decisions.',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white, fontSize: 16),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          //Our MaterialButton which when pressed will take us to a new screen named as
-          //LoginScreen
-          MaterialButton(
-            elevation: 0,
-            height: 50,
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => LoginScreen()));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Get Started',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                  ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                )
-              ],
-            ),
-            textColor: Colors.white,
-          ),
-          MaterialButton(
-              child: Row(
+    return CustomPaint(
+        painter: MyPainter(),
+        child: ListView(
+                
+                // mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  AppBar(),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 24.0),
+                    child: Text(
+                      'Welcome to Slug School!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        decoration: TextDecoration.none,
+                        fontSize: 48,
+                        ),
+                      ),
+                  ),
+                  SizedBox(height: 20),
+                  //We take the image from the assets
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Image(
+                        image: AssetImage('../images/SlugSchoolColor.png'),
+                        height: 250, 
+                      ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  
                   Text(
-                    "Click for Dummy Prof Page",
+                    'An app to help you make important enrollment decisions.',
                     textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white, 
+                      fontSize: 16,
+
+                      ),
                   ),
-                  Icon(Icons.account_circle_sharp),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  //Our MaterialButton which when pressed will take us to a new screen named as
+                  //LoginScreen
+                  MaterialButton(
+                    elevation: 0,
+                    height: 50,
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => LoginScreen()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Get Started',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                    textColor: Colors.white,
+                  ),
+                  MaterialButton(
+                    // button to redirect to search page
+                    elevation: 0,
+                    height: 50,
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => SearchPage()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Search for Course or Professor',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                    textColor: Colors.white,
+                  ),
+                  MaterialButton(
+                    // button to redirect to comments
+                    elevation: 0,
+                    height: 50,
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => CommentsPage()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Dummy Comments',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                    textColor: Colors.white,
+                  ),
+                  MaterialButton(
+                    // button to redirect to html form page
+                    elevation: 0,
+                    height: 50,
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => FormPage()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Test HTML Form Page',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                    textColor: Colors.white,
+                  ),
+                  MaterialButton(
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            "Click for Dummy Course Page",
+                            textAlign: TextAlign.center,
+                          ),
+                          Icon(Icons.account_circle_sharp),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => CoursePage(
+                                      Course("Fall2011_CourseNumber", "CMPS- 5J"),
+                                    )));
+                      }),
                 ],
-                mainAxisAlignment: MainAxisAlignment.center,
               ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => ProfPage(
-                              Professor("Abbink, Emily K.", "Fall2011"),
-                            )));
-              }),
-          MaterialButton(
-            // button to redirect to search page
-            elevation: 0,
-            height: 50,
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => SearchPage()));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Search for Course or Professor',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                )
-              ],
-            ),
-            textColor: Colors.white,
-          ),
-          MaterialButton(
-            // button to redirect to comments
-            elevation: 0,
-            height: 50,
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => CommentsPage()));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Dummy Comments',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                )
-              ],
-            ),
-            textColor: Colors.white,
-          ),
-          MaterialButton(
-            // button to redirect to html form page
-            elevation: 0,
-            height: 50,
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => FormPage()));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Test HTML Form Page',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                )
-              ],
-            ),
-            textColor: Colors.white,
-          ),
-          MaterialButton(
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    "Click for Dummy Course Page",
-                    textAlign: TextAlign.center,
-                  ),
-                  Icon(Icons.account_circle_sharp),
-                ],
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => CoursePage(
-                              Course("Fall2011_CourseNumber", "CMPS- 5J"),
-                            )));
-              }),
-        ],
-      ),
-    );
+      );
   }
 }
 

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 // This file contains the themes for the flutter app!
@@ -6,7 +8,7 @@ import 'package:flutter/material.dart';
 // "import 'theme/themes.dart';"
 
 // Color scheme
-// FROM: https://colorpalettes.net/color-palette-1944/
+// FROM: https://colorpalettes.net/color-palette-1944/2
 
 // Color primaryColor = Color(0xFF203277);
 Color secondColor = Color(0xFFE0D030);
@@ -48,7 +50,9 @@ class SlugThemes {
         scaffoldBackgroundColor: this.primary,
         unselectedWidgetColor: this.accentOne,
         selectedRowColor: this.accentThree,
-        hoverColor: this.secondary);
+        hoverColor: this.secondary,
+        
+        );
   }
 
   // Large text object
@@ -101,4 +105,48 @@ class CirclePainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
+}
+
+// Custom paint the homepage
+// https://www.youtube.com/watch?v=u96GgqHFy3c
+class MyPainter extends CustomPainter{
+  @override
+  void paint(Canvas canvas, Size size) {
+      final height = size.height;
+      final width = size.width;
+      Paint paint = Paint();
+
+      // Main Background
+      Path mainBackground = Path();
+      mainBackground.addRect(Rect.fromLTRB(0, 0, width, height));
+      paint.color = Color(0xFF2032B7);
+      canvas.drawPath(mainBackground, paint);
+
+      // For circle drawing
+      List<Color> shades = [
+        Color(0xFF0115AB), 
+        Color(0xFF2032F7), 
+        Color(0xFF2032D7) 
+      ];
+      int x = 0;
+      // Random rand = Random(69);
+      Random rand = Random();
+
+      // Scatter random circles on the homepage
+      while(x < 40){
+        paint.color = shades[x % 3];
+        double wPlace = rand.nextDouble() * (width * 0.9);
+        double hPlace = rand.nextDouble() * (height * 0.9);
+        double circleDia  = (rand.nextDouble() * 250) + 50;
+        Rect rct = Rect.fromLTWH(wPlace, hPlace, circleDia, circleDia);
+        canvas.drawOval(rct, paint);
+        x++;
+      }
+    }
+  
+    @override
+    bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return oldDelegate != this;
+  }
+  
 }
