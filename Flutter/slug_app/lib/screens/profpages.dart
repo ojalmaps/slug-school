@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../theme/themes.dart';
 import '../components/graph.dart';
-
+import '../components/form.dart';
 
 class CreateCourseWidg extends StatelessWidget {
   final List<dynamic> stats;
+  final String profName;
+  final String collectionName;
 
-  CreateCourseWidg(this.stats);
+  CreateCourseWidg(this.stats, this.collectionName, this.profName);
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +85,11 @@ class CreateCourseWidg extends StatelessWidget {
               width: 150,
               child: Graph(numAs, numBs, numCs, numDs, numFs),
             ),
+            Text(''),  // spaceholder (new line)
+            Container(
+              width: 600,
+              child: AnonForm(collectionName, profName),
+            ),
           ],
         ),
       ),
@@ -105,57 +112,58 @@ class GetCommentSection extends StatelessWidget {
     return new Expanded(
         child: SizedBox(
             height: 600.0,
-            child: Padding( 
-              padding: EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Flexible(
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: comments
-                        .orderBy("timestamp", descending: false)
-                        .snapshots(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasError) {
-                        return Text("Something went wrong");
-                      }
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Text("Loading");
-                      }
-                      return new ListView(
-                        children:
-                            snapshot.data.docs.map((DocumentSnapshot document) {
-                          return new ListTile(
-                              title: new Text(document.data()["comment"]));
-                        }).toList(),
-                      );
-                    },
-                  ),
-                ),
-                TextField(
-                  controller: commentController,
-                  decoration: InputDecoration(hintText: ' Add a comment!'),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(32),
-                  child:ElevatedButton(
-                    onPressed: () {
-                      var com = commentController.text;
-                      commentController.clear();
-                      comments.add({
-                        "comment": com,
-                        "timestamp": FieldValue.serverTimestamp()
-                      });
-                      //_findFirebaseComments();
-                      //Text(fireComments.toString());
-                    },
-                    child: Text('Submit'),
-                  ),
-                ),
-              ],
-            ))));
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 32),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: comments
+                            .orderBy("timestamp", descending: false)
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            return Text("Something went wrong");
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Text("Loading");
+                          }
+                          return new ListView(
+                            children: snapshot.data.docs
+                                .map((DocumentSnapshot document) {
+                              return new ListTile(
+                                  title: new Text(document.data()["comment"]));
+                            }).toList(),
+                          );
+                        },
+                      ),
+                    ),
+                    TextField(
+                      controller: commentController,
+                      decoration: InputDecoration(hintText: ' Add a comment!'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(32),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          var com = commentController.text;
+                          commentController.clear();
+                          comments.add({
+                            "comment": com,
+                            "timestamp": FieldValue.serverTimestamp()
+                          });
+                          //_findFirebaseComments();
+                          //Text(fireComments.toString());
+                        },
+                        child: Text('Submit'),
+                      ),
+                    ),
+                  ],
+                ))));
   }
 }
 
@@ -164,13 +172,13 @@ class GetCommentSection extends StatelessWidget {
 // If unsuccessful, display some kind of error message
 class GetProfInfo extends StatelessWidget {
   final String documentId;
-
+  final String collectionName = 'Fall2011_Perfect';
   GetProfInfo(this.documentId);
 
   @override
   Widget build(BuildContext context) {
     CollectionReference users =
-        FirebaseFirestore.instance.collection('Fall2011_Perfect');
+        FirebaseFirestore.instance.collection(collectionName);
 
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(documentId).get(),
@@ -191,7 +199,7 @@ class GetProfInfo extends StatelessWidget {
               continue;
             } else if (curr is List<dynamic>) {
               if (dept.length == 0) dept = curr[0];
-              pclasses.add(CreateCourseWidg(curr));
+              pclasses.add(CreateCourseWidg(curr, collectionName, documentId));
             }
           }
           dept = "Department: " + dept.substring(0, dept.indexOf("-"));
@@ -279,16 +287,14 @@ class Professor {
   }
 }
 
-
-
-  // Linking this data to anonymous form
-  // The following code creates the an_form subcollection in firestore. 
-  //  final CollectionReference an_comments = FirebaseFirestore.instance
-  //       .collection('Fall2011_Perfect')
-  //       .doc(documentId)
-  //       .collection('an_form');  
-  //       var an_com = an_commentController.text;                       // creates variable to temp store the text                          
-  //                   an_commentController.clear();                                 
-  //                   an_form.add({                                  // an_comments : subcollection 
-  //                     "value1": an_val1,
-  //                   });
+// Linking this data to anonymous form
+// The following code creates the an_form subcollection in firestore.
+//  final CollectionReference an_comments = FirebaseFirestore.instance
+//       .collection('Fall2011_Perfect')
+//       .doc(documentId)
+//       .collection('an_form');
+//       var an_com = an_commentController.text;                       // creates variable to temp store the text
+//                   an_commentController.clear();
+//                   an_form.add({                                  // an_comments : subcollection
+//                     "value1": an_val1,
+//                   });
