@@ -58,14 +58,13 @@ class SlugThemes {
   // Large text object
   TextStyle largeText() {
     return new TextStyle(
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w700,
         fontSize: 36,
-        background: Paint()
-          ..strokeWidth = 50 //changed these to try and fix formatting issues
-          ..color = this.secondary
-          ..style = PaintingStyle.stroke
-          ..strokeJoin = StrokeJoin.round,
-        color: Colors.black,
+        decoration: TextDecoration.underline,
+        decorationColor: this.secondary,
+        fontFamily: "OpenSans",
+        color: Colors.white,
+        shadows: [Shadow(color: Colors.black, offset: Offset(1.0, 1.0), blurRadius: 2.0)]
         );
   }
 
@@ -73,14 +72,28 @@ class SlugThemes {
   TextStyle medText() {
     return new TextStyle(
         fontSize: 24,
-        background: Paint()
-          ..strokeWidth = 0 //changed these to try and fix formatting issues
-          ..color = this.accentTwo
-          ..style = PaintingStyle.stroke
-          ..strokeJoin = StrokeJoin.miter,
-        color: Colors.black);
+        fontWeight: FontWeight.w700,
+        // background: Paint()
+        //   ..strokeWidth = 0 //changed these to try and fix formatting issues
+        //   ..color = this.accentTwo
+        //   ..style = PaintingStyle.stroke
+        //   ..strokeJoin = StrokeJoin.miter,
+        fontFamily: "OpenSans",
+        color: Colors.white,
+        shadows: [Shadow(color: Colors.black, offset: Offset(1.0, 1.0), blurRadius: 2.0)],
+        );
   }
-
+  
+  // Small text object
+  TextStyle smallText() {
+    return new TextStyle(
+        fontWeight: FontWeight.w300,
+        fontSize: 16,
+        fontFamily: "OpenSans",
+        color: Colors.white,
+        // shadows: [Shadow(color: Colors.black, offset: Offset(1.0, 1.0), blurRadius: 2.0)],
+        );
+  }
   // Buttons on home page
   TextStyle homePageButtomTheme(){
     return TextStyle( color: Colors.white, fontSize: 20, fontFamily: "OpenSans");

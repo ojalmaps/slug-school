@@ -20,6 +20,7 @@ class AnonForm extends StatefulWidget {
 class FormState extends State<AnonForm> {
   final String collection, doc;
   FormState(this.collection, this.doc);
+  SlugThemes formthemes = SlugThemes();
 
   List choices = ['5', '4', '3', '2', '1', ''];
 
@@ -90,7 +91,7 @@ class FormState extends State<AnonForm> {
                             width: 35,
                             height: 20,
                             child: DropdownButton(
-                              dropdownColor: Colors.blueGrey,
+                              dropdownColor: formthemes.accentThree,
                               iconSize:
                                   0, // make the array smaller (not sure why it still shows though)
                               value: difficulty,
@@ -107,7 +108,9 @@ class FormState extends State<AnonForm> {
                                   value: choice,
                                   child: Text(choice,
                                       textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: formthemes.smallText(),
+                                    ),
                                 );
                               }).toList(),
                             ),
@@ -125,7 +128,7 @@ class FormState extends State<AnonForm> {
                             width: 35,
                             height: 20,
                             child: DropdownButton(
-                              dropdownColor: Colors.blueGrey,
+                              dropdownColor: formthemes.accentThree,
                               iconSize:
                                   0, // make the array smaller (not sure why it still shows though)
                               value: enjoyment,
@@ -142,7 +145,9 @@ class FormState extends State<AnonForm> {
                                   value: choice,
                                   child: Text(choice,
                                       textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: formthemes.smallText(),
+                                      ),
                                 );
                               }).toList(),
                             ),
@@ -160,7 +165,7 @@ class FormState extends State<AnonForm> {
                             width: 35,
                             height: 20,
                             child: DropdownButton(
-                              dropdownColor: Colors.blueGrey,
+                              dropdownColor: formthemes.accentThree,
                               iconSize:
                                   0, // make the array smaller (not sure why it still shows though)
                               value: workload,
@@ -177,7 +182,8 @@ class FormState extends State<AnonForm> {
                                   value: choice,
                                   child: Text(choice,
                                       textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: formthemes.smallText(),),
                                 );
                               }).toList(),
                             ),
@@ -195,7 +201,7 @@ class FormState extends State<AnonForm> {
                             width: 35,
                             height: 20,
                             child: DropdownButton(
-                              dropdownColor: Colors.blueGrey,
+                              dropdownColor: formthemes.accentThree,
                               iconSize:
                                   0, // make the array smaller (not sure why it still shows though)
                               value: preparedness,
@@ -212,7 +218,8 @@ class FormState extends State<AnonForm> {
                                   value: choice,
                                   child: Text(choice,
                                       textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: formthemes.smallText(),),
                                 );
                               }).toList(),
                             ),
@@ -230,7 +237,7 @@ class FormState extends State<AnonForm> {
                             width: 35,
                             height: 20,
                             child: DropdownButton(
-                              dropdownColor: Colors.blueGrey,
+                              dropdownColor: formthemes.accentThree,
                               iconSize:
                                   0, // make the array smaller (not sure why it still shows though)
                               value: helpfulness,
@@ -247,7 +254,8 @@ class FormState extends State<AnonForm> {
                                   value: choice,
                                   child: Text(choice,
                                       textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: formthemes.smallText(),),
                                 );
                               }).toList(),
                             ),

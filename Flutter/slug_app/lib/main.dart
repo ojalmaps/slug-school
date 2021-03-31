@@ -75,6 +75,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                   ),
                   SizedBox(height: 20),
+                  Text(
+                    'An app to help you make enrollment decisions at UC Santa Cruz.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white, 
+                      fontSize: 20,
+                      decoration: TextDecoration.none,
+                      ),
+                  ),
+
+                  SizedBox(
+                    height: 30,
+                  ),
                   //We take the image from the assets
                   Padding(
                     padding: EdgeInsets.all(16),
@@ -87,45 +100,34 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 20,
                   ),
                   
-                  Text(
-                    'An app to help you make enrollment decisions at UC Santa Cruz.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white, 
-                      fontSize: 20,
-
-                      ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
+                 
                   //Our MaterialButton which when pressed will take us to a new screen named as
                   //LoginScreen
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 250.0, vertical: 6.0),
-                      child: MaterialButton(
-                        elevation: 0,
-                        height: 50,
-                        onPressed: () {
-                          Navigator.push(
-                              context, MaterialPageRoute(builder: (_) => LoginScreen()));
-                        },
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                'Get Started',
-                                style: homeThemes.homePageButtomTheme(),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.white,
-                              )
-                            ],
-                          ),
-                        textColor: Colors.white,
-                      ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: 250.0, vertical: 6.0),
+                  //     child: MaterialButton(
+                  //       elevation: 0,
+                  //       height: 50,
+                  //       onPressed: () {
+                  //         Navigator.push(
+                  //             context, MaterialPageRoute(builder: (_) => LoginScreen()));
+                  //       },
+                  //       child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.center,
+                  //           children: <Widget>[
+                  //             Text(
+                  //               'Log In ',
+                  //               style: homeThemes.homePageButtomTheme(),
+                  //             ),
+                  //             Icon(
+                  //               Icons.arrow_forward_ios,
+                  //               color: Colors.white,
+                  //             )
+                  //           ],
+                  //         ),
+                  //       textColor: Colors.white,
+                  //     ),
+                  // ),
                   Padding(
                     padding:  EdgeInsets.symmetric(horizontal: 250.0, vertical: 6.0),
                     child: MaterialButton(
@@ -140,11 +142,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'Search for Course or Professor',
+                            'Search for a Professor ',
                             style: homeThemes.homePageButtomTheme(),
                           ),
                           Icon(
-                            Icons.arrow_forward_ios,
+                            Icons.person_search,
                             color: Colors.white,
                           )
                         ],
@@ -153,77 +155,120 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ),
 
-                  MaterialButton(
-                    // button to redirect to comments
-                    elevation: 0,
-                    height: 50,
-                    onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => CommentsPage()));
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Dummy Comments',
+                  // MaterialButton(
+                  //   // button to redirect to comments
+                  //   elevation: 0,
+                  //   height: 50,
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //         context, MaterialPageRoute(builder: (_) => CommentsPage()));
+                  //   },
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: <Widget>[
+                  //       Text(
+                  //         'Dummy Comments',
+                  //         style: TextStyle(
+                  //           color: Colors.white,
+                  //           fontSize: 14,
+                  //         ),
+                  //       ),
+                  //       Icon(
+                  //         Icons.arrow_forward_ios,
+                  //         color: Colors.white,
+                  //       )
+                  //     ],
+                  //   ),
+                  //   textColor: Colors.white,
+                  // ),
+
+                  // MaterialButton(
+                  //   // button to redirect to html form page
+                  //   elevation: 0,
+                  //   height: 50,
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //         context, MaterialPageRoute(builder: (_) => FormPage()));
+                  //   },
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: <Widget>[
+                  //       Text(
+                  //         'Test HTML Form Page',
+                  //         style: TextStyle(
+                  //           color: Colors.white,
+                  //           fontSize: 14,
+                  //         ),
+                  //       ),
+                  //       Icon(
+                  //         Icons.arrow_forward_ios,
+                  //         color: Colors.white,
+                  //       )
+                  //     ],
+                  //   ),
+                  //   textColor: Colors.white,
+                  // ),
+                  // MaterialButton(
+                  //     child: Row(
+                  //       children: <Widget>[
+                  //         Text(
+                  //           "Click for Dummy Course Page",
+                  //           textAlign: TextAlign.center,
+                  //         ),
+                  //         Icon(Icons.account_circle_sharp),
+                  //       ],
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //     ),
+                  //     onPressed: () {
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (_) => CoursePage(
+                  //                     Course("Fall2011_CourseNumber", "CMPS- 5J"),
+                  //                   )));
+                  //     }),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20.0, 24.0, 20.0, 0.0),
+                        child:Text(
+                          "How It Works",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
+                            fontFamily: "OpenSans",
+                            fontSize: 36,
+                            fontStyle: FontStyle.italic,
                             color: Colors.white,
-                            fontSize: 14,
-                          ),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                    textColor: Colors.white,
-                  ),
-                  MaterialButton(
-                    // button to redirect to html form page
-                    elevation: 0,
-                    height: 50,
-                    onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => FormPage()));
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Test HTML Form Page',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                    textColor: Colors.white,
-                  ),
-                  MaterialButton(
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            "Click for Dummy Course Page",
-                            textAlign: TextAlign.center,
-                          ),
-                          Icon(Icons.account_circle_sharp),
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.center,
+                            decoration: TextDecoration.none
+                            ),
+                        ), 
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => CoursePage(
-                                      Course("Fall2011_CourseNumber", "CMPS- 5J"),
-                                    )));
-                      }),
+                      
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 600.0),
+                        child: Divider(
+                          height: 36.0,
+                          thickness: 12.0,
+                          color: homeThemes.accentTwo,
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 650.0),
+                        child:Text(
+                          "Navigate to the search page above to find the professor that you are looking for. "
+                          "When you see and click on the desired professor, you will be taken to their page."
+                          " On the professor page you can find the grade distributions for previous courses they"
+                          " have taught, comments previous students have written about the professor, and a feedback "
+                          "form that you can fill out if you have also taken their class before.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: "OpenSans",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            color: Colors.white,
+                            decoration: TextDecoration.none
+                            ),
+                        ), 
+                      ),
+                      
                 ],
               ),
       );
