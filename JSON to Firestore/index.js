@@ -1,6 +1,6 @@
 const admin = require('./node_modules/firebase-admin');
 
-// service-key.json is the encryption key you get from firestore through a separate process
+// service-key.json is the encryption key you get from firestore
 const serviceAccount = require("./SERVICE_KEY_NAME.json");
 
 // FILENAME is the name of the file you converted from csv to json.
@@ -24,7 +24,7 @@ if (data && (typeof data === "object")) {
 
    Object.keys(data).forEach(docKey => {
       admin.firestore().collection(collectionKey)
-         .doc() // Do .doc(docKey) if you want to use the Unique ID as the Document ID in Firestore
+         .doc(docKey) // Do .doc() if you want to make random generated Document IDs in Firestore
          .set(data[docKey])
          .then((res) => {
          console.log("Document " + docKey + " successfully written!");
