@@ -1,14 +1,9 @@
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyC9XQZOn3e8hl35jeafJGVm1DbkbiRyua8",
-  authDomain: "slug-meet.firebaseapp.com",
-  databaseURL: "https://slug-meet-default-rtdb.firebaseio.com",
-  projectId: "slug-meet",
-  storageBucket: "slug-meet.appspot.com",
-  messagingSenderId: "271692540579",
-  appId: "1:271692540579:web:d4a4135810158b60bd2d16"
+  // Can be found in the Project Console
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
